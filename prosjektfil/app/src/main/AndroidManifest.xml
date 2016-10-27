@@ -17,6 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListUserActivity"></activity>
+        <activity android:name=".JobSeekerActivity"></activity>
     </application>
+
 
 </manifest>
