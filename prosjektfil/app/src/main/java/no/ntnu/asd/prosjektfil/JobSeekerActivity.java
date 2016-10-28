@@ -6,20 +6,17 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,7 +34,7 @@ public class JobSeekerActivity extends AppCompatActivity {
     Uri imageUri;
 
                             // husk å bytte ip adresse til din egen.
-    public static final String url ="http://158.38.193.13:8080/RESTapiv2/webresources/restapi.userprofile";
+    public static final String url ="http://158.38.193.13:8080/RESTapiv2/webresources/userprofile";
     RequestQueue requestQueue;
     private ArrayList<User> users;
     private UserAdapter adapter;
@@ -48,11 +45,12 @@ public class JobSeekerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_seeker);
-        //user = new User();
 
         profilePicture = (ImageView) findViewById(R.id.imageView);
         loadImageButton = (Button) findViewById(R.id.buttonProfilepicture);
         createUserButton = (Button) findViewById(R.id.button3);
+
+        getRequestQueue();
 
         loadImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +134,18 @@ public class JobSeekerActivity extends AppCompatActivity {
         );
 
     } // end of onCreate
+
+    /**
+     * If there is no requestQueue then its create a new reqeustQueue
+     * @return requestQueue
+     */
+    public RequestQueue getRequestQueue() {
+        if (requestQueue == null) {
+            requestQueue = Volley.newRequestQueue(getApplicationContext());
+        }
+
+        return requestQueue;
+    }
 
     private void openGallery(){
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);

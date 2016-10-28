@@ -23,7 +23,7 @@ import javax.ws.rs.core.MediaType;
  * @author ingalill
  */
 @Stateless
-@Path("asd.ntnu.no.restapiv2.userprofile")
+@Path("userprofile")
 public class UserprofileFacadeREST extends AbstractFacade<Userprofile> {
 
     @PersistenceContext(unitName = "asd.ntnu.no_RESTapiv2_war_1.0-SNAPSHOTPU")
