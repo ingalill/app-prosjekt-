@@ -14,12 +14,13 @@ public class User implements Serializable {
     private String home;
     private String information;
 
-   
+   public User(){
 
-    public User(String firstname, String lastname,String home, String information){ // Long id
+   }
+
+    public User(String firstname, String lastname,String home, String information){
         this.firstname = firstname;
         this.lastname = lastname;
-        //this.id = id;
         this.home = home;
         this.information = information;
     }
@@ -55,10 +56,6 @@ public class User implements Serializable {
 
         return id;
     }
-
-   /*public void setID(Long id) {
-        this.id = id;
-    } */
 
     public String getHome() {
         return home;
