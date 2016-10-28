@@ -14,6 +14,10 @@ public class User implements Serializable {
     private String home;
     private String information;
 
+    public User(){
+
+    }
+
     public User(String firstname, String lastname,String home, String information){ // Long id
         this.firstname = firstname;
         this.lastname = lastname;

@@ -37,17 +37,18 @@ public class JobSeekerActivity extends AppCompatActivity {
     Uri imageUri;
 
                             // husk å bytte ip adresse til din egen.
-    public static final String url ="http://158.38.193.13:8080/RESTapi/webresources/restapi.userprofile";
+    public static final String url ="http://158.38.193.13:8080/RESTapiv2/webresources/restapi.userprofile";
     RequestQueue requestQueue;
     private ArrayList<User> users;
     private UserAdapter adapter;
     private Button createUserButton;
-    private User user;
+    //private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_seeker);
+        //user = new User();
 
         profilePicture = (ImageView) findViewById(R.id.imageView);
         loadImageButton = (Button) findViewById(R.id.buttonProfilepicture);
@@ -94,56 +95,47 @@ public class JobSeekerActivity extends AppCompatActivity {
 
         // det over skal fungere
 
-        //final EditText messageText = (EditText) findViewById(R.id.messageText);
 
-        messageText.setOnEditorActionListener(new EditText.OnEditorActionListener() { //createUserButtons skal inn her
-            @Override
-            public boolean onEditorAction(TextView v, int actionid, KeyEvent event) { // on click lisnter?
-                if (actionid == EditorInfo.IME_ACTION_SEND) {
-                    String newMessage = messageText.getText().toString(); // sjekke om knapp er trykt
-                    if (newMessage.equals("")) {
-                        return false;
-                    } else {
-                        System.out.println("Legg til ny bruker her! ");
-                        User user = new User(user.getID(),user.getFirstname(), user.getLastname(), user.getHome(),user.getInformation());//newMessage, contactName, conversationId);
+        createUserButton.setOnClickListener( new View.OnClickListener() {
+        @Override
+                public void onClick(View v){
+           User us =  new User();
+                    System.out.println("Legg til ny bruker her! ");
+                    User user = new User(us.getID(),us.getFirstname(), us.getLastname(), us.getHome(),us.getInformation());
 
-                        JSONObject jsonObject = new JSONObject();
-                        try {
-                            jsonObject.put("id", user.getID());
-                            jsonObject.put("firstname", user.getFirstname());
-                            jsonObject.put("lastname", user.getLastname() );
-                            jsonObject.put("home", user.getHome());
-                            jsonObject.put("information", user.getInformation());
-                            Log.d("test", "put json");
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("id", user.getID());
+                        jsonObject.put("firstname", user.getFirstname());
+                        jsonObject.put("lastname", user.getLastname() );
+                        jsonObject.put("home", user.getHome());
+                        jsonObject.put("information", user.getInformation());
+                        Log.d("test", "put json");
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
-                                new Response.Listener<JSONObject>() {
-                                    @Override
-                                    public void onResponse(JSONObject response) {
-                                        Log.d("resp", response.toString());
-                                    }
-                                }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.d("test", "Error test");
-                            }
-                        });
-                        requestQueue.add(jsonObjectRequest);
-                        adapter.add(user);
-                       // messageText.setText("");
-                        return true;
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    Log.d("resp", response.toString());
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("test", "Error test");
+                        }
+                    });
+                    requestQueue.add(jsonObjectRequest);
+                    adapter.add(user);
                 }
-                return false;
-
             }
-        });
 
 
-    }
+        );
+
+    } // end of onCreate
 
     private void openGallery(){
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);

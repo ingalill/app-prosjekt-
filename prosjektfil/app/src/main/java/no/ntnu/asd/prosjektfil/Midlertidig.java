@@ -48,6 +48,8 @@ public class Midlertidig {
             });
     requestQueue.add(jsonArrayRequest); */
 
+    // HOLDER PÅ MED
+/*
     final EditText messageText = (EditText) findViewById(R.id.messageText);
 
     messageText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
@@ -92,5 +94,5 @@ public class Midlertidig {
             return false;
 
         }
-    });
+    }); */
 }
