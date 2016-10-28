@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -23,16 +24,19 @@ public class UserAdapter extends ArrayAdapter<User>{
     @NonNull
     @Override
      public View getView(int position, View convertView, ViewGroup parent){
-         User user = (User)getItem(position);
+        User user = getItem(position);
 
-         if (convertView == null){
-             convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_list_user, parent, false);
-         }
+        if (convertView == null){
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.user_row, parent, false);
+        }
 
-         TextView userInfo = (TextView) convertView.findViewById(R.id.userInfo);
-         userInfo.setText("Name: " + user.getFirstname() + " " + user.getLastname());
+        TextView userInfo = (TextView) convertView.findViewById(R.id.userInfo);
+        userInfo.setText("Name: " + user.getFirstname() + " " + user.getLastname());
 
-         return convertView;
+        ImageView userImage = (ImageView)convertView.findViewById(R.id.userImage);
+        userImage.setImageResource(R.drawable.thumb);
+
+        return convertView;
      }
 
 }
