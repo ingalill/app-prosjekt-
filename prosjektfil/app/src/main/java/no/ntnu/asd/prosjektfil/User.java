@@ -11,31 +11,41 @@ public class User implements Serializable {
     private String firstname;
     private String lastname;
     private Long id;
+    private String phone;
     private String home;
     private String information;
 
    public User(){
-
    }
 
-    public User(String firstname, String lastname,String home, String information){
+    public User(String firstname, String lastname,String home, String phone,String information){
         this.firstname = firstname;
         this.lastname = lastname;
         this.home = home;
         this.information = information;
+        this.phone = phone;
     }
 
-    public User(Long id,String firstname, String lastname,String home, String information){
+    public User(Long id,String firstname, String lastname,String home, String phone, String information){
         this.firstname = firstname;
         this.lastname = lastname;
         this.id = id;
         this.home = home;
+        this.phone = phone;
         this.information = information;
     }
 
     public String getFirstname() {
 
         return firstname;
+    }
+
+    public String getPhone(){
+        return phone;
+    }
+
+    public void getPhone(String phone){
+        this.phone = phone;
     }
 
     public void setFirstname(String firstname) {

@@ -24,8 +24,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-
-
 public class JobSeekerActivity extends AppCompatActivity {
 
     ImageView profilePicture;
@@ -36,10 +34,9 @@ public class JobSeekerActivity extends AppCompatActivity {
                             // husk å bytte ip adresse til din egen.
     public static final String url ="http://158.38.193.13:8080/RESTapiv2/webresources/userprofile";
     RequestQueue requestQueue;
-    private ArrayList<User> users;
-    private UserAdapter adapter;
+    private ArrayList<User> users  = new ArrayList<User>();
     private Button createUserButton;
-    //private User user;
+    private UserAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +46,11 @@ public class JobSeekerActivity extends AppCompatActivity {
         profilePicture = (ImageView) findViewById(R.id.imageView);
         loadImageButton = (Button) findViewById(R.id.buttonProfilepicture);
         createUserButton = (Button) findViewById(R.id.button3);
+
+        adapter = new UserAdapter(this,users);
+        //createUserButton.setAdapter(adapter);
+        //userList.setAdapter(adapter);
+
 
         getRequestQueue();
 
@@ -70,8 +72,9 @@ public class JobSeekerActivity extends AppCompatActivity {
                                 String firstname = jsonObject.getString("firstname"); // MÅ MATCHE DB!!
                                 String lastname = jsonObject.getString("lastname");
                                 String home = jsonObject.getString("home");
+                                String phone = jsonObject.getString("phone");
                                 String information = jsonObject.getString("information");
-                                User newUser = new User(firstname, lastname, home, information);
+                                User newUser = new User(firstname, lastname, home,phone, information);
                                 users.add(newUser);
                                 Log.d("tester å: ", "Legg til arbeidstaker");
                             }
@@ -94,43 +97,44 @@ public class JobSeekerActivity extends AppCompatActivity {
         // det over skal fungere
 
 
-        createUserButton.setOnClickListener( new View.OnClickListener() {
-        @Override
-                public void onClick(View v){
-           User us =  new User();
-                    System.out.println("Legg til ny bruker her! ");
-                    User user = new User(us.getID(),us.getFirstname(), us.getLastname(), us.getHome(),us.getInformation());
+        createUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User us = new User();
+                //System.out.println("Legg til ny bruker her! ");
+                User user = new User(us.getID(), us.getFirstname(), us.getLastname(), us.getHome(), us.getPhone(), us.getInformation());
 
-                    JSONObject jsonObject = new JSONObject();
-                    try {
-                        jsonObject.put("id", user.getID());
-                        jsonObject.put("firstname", user.getFirstname());
-                        jsonObject.put("lastname", user.getLastname() );
-                        jsonObject.put("home", user.getHome());
-                        jsonObject.put("information", user.getInformation());
-                        Log.d("test", "put json");
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("id", user.getID());
+                    jsonObject.put("firstname", user.getFirstname());
+                    jsonObject.put("lastname", user.getLastname());
+                    jsonObject.put("home", user.getHome());
+                    jsonObject.put("phone", user.getPhone());
+                    jsonObject.put("information", user.getInformation());
+                    Log.d("test", "put json");
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
-                            new Response.Listener<JSONObject>() {
-                                @Override
-                                public void onResponse(JSONObject response) {
-                                    Log.d("resp", response.toString());
-                                }
-                            }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.d("test", "Error test");
-                        }
-                    });
-                    requestQueue.add(jsonObjectRequest);
-                    adapter.add(user);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                Log.d("resp", response.toString());
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.d("test", "Error test",error);
+                            }
+                        });
+                requestQueue.add(jsonObjectRequest);
+                adapter.add(user);
+                Intent intent = new Intent(getApplicationContext(), ListUserActivity.class);
+                startActivity(intent);
             }
-
-
+        }
         );
 
     } // end of onCreate
@@ -143,7 +147,6 @@ public class JobSeekerActivity extends AppCompatActivity {
         if (requestQueue == null) {
             requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
-
         return requestQueue;
     }
 
