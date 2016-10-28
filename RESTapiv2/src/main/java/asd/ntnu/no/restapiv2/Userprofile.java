@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package restapi;
+package asd.ntnu.no.restapiv2;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -18,30 +18,30 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @version 1
- * @author ingalillbjolstad
+ *
+ * @author ingalill
  */
 @Entity
 @Table(name = "USERPROFILE")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Userprofile.findAll", query = "SELECT u FROM Userprofile u")
-    , @NamedQuery(name = "Userprofile.findByFirstname", query = "SELECT u FROM Userprofile u WHERE u.firstname = :firstname")
     , @NamedQuery(name = "Userprofile.findById", query = "SELECT u FROM Userprofile u WHERE u.id = :id")
+    , @NamedQuery(name = "Userprofile.findByFirstname", query = "SELECT u FROM Userprofile u WHERE u.firstname = :firstname")
     , @NamedQuery(name = "Userprofile.findByLastname", query = "SELECT u FROM Userprofile u WHERE u.lastname = :lastname")
     , @NamedQuery(name = "Userprofile.findByHome", query = "SELECT u FROM Userprofile u WHERE u.home = :home")
     , @NamedQuery(name = "Userprofile.findByInformation", query = "SELECT u FROM Userprofile u WHERE u.information = :information")})
 public class Userprofile implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Size(max = 20)
-    @Column(name = "FIRSTNAME")
-    private String firstname;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")
     private Integer id;
+    @Size(max = 20)
+    @Column(name = "FIRSTNAME")
+    private String firstname;
     @Size(max = 20)
     @Column(name = "LASTNAME")
     private String lastname;
@@ -59,76 +59,42 @@ public class Userprofile implements Serializable {
         this.id = id;
     }
 
-    /**
-     * Get the first name of the User
-     * @return firstname
-     */
-    public String getFirstname() {
-        return firstname;
-    }
-    /**
-     * Set the first name of the user
-     * @param firstname 
-     */
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-    /**
-     * Get the id of the user
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
-    /*
+
     public void setId(Integer id) {
         this.id = id;
-    } */
-    
-    /**
-     * Get the last name of the user
-     * @return lastname
-     */
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
     public String getLastname() {
         return lastname;
     }
-    
-    /**
-     * Set the lastname of the user
-     * @param lastname 
-     */
+
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
-    
-    /**
-     * Get the place where the user lives
-     * @return home
-     */
+
     public String getHome() {
         return home;
     }
-    
-    /**
-     * Set the place where the user lives
-     * @param home 
-     */
+
     public void setHome(String home) {
         this.home = home;
     }
-    
-    /**
-     * Get the information about the user
-     * @return information
-     */
+
     public String getInformation() {
         return information;
     }
-    
-    /**
-     * Set the information about the user.
-     * @param information 
-     */
+
     public void setInformation(String information) {
         this.information = information;
     }
@@ -155,7 +121,7 @@ public class Userprofile implements Serializable {
 
     @Override
     public String toString() {
-        return "restapi.Userprofile[ id=" + id + " ]";
+        return "asd.ntnu.no.restapiv2.Userprofile[ id=" + id + " ]";
     }
     
 }

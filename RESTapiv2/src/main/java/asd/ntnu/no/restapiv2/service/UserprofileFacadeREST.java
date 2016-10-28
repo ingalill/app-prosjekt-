@@ -1,10 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *Må ha en søke funksjon.
  */
-package restapi.service;
+package asd.ntnu.no.restapiv2.service;
 
+import asd.ntnu.no.restapiv2.Userprofile;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -18,17 +17,16 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import restapi.Userprofile;
 
 /**
- *
- * @author ingalillbjolstad
+ * @version 2
+ * @author ingalill
  */
 @Stateless
-@Path("restapi.userprofile")
+@Path("asd.ntnu.no.restapiv2.userprofile")
 public class UserprofileFacadeREST extends AbstractFacade<Userprofile> {
 
-    @PersistenceContext(unitName = "RESTapiPU")
+    @PersistenceContext(unitName = "asd.ntnu.no_RESTapiv2_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
     public UserprofileFacadeREST() {

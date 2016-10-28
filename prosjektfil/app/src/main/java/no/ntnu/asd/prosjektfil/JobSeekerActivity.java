@@ -5,9 +5,29 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+
 
 public class JobSeekerActivity extends AppCompatActivity {
 
@@ -16,6 +36,14 @@ public class JobSeekerActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
 
+                            // husk å bytte ip adresse til din egen.
+    public static final String url ="http://158.38.193.13:8080/RESTapi/webresources/restapi.userprofile";
+    RequestQueue requestQueue;
+    private ArrayList<User> users;
+    private UserAdapter adapter;
+    private Button createUserButton;
+    private User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +51,7 @@ public class JobSeekerActivity extends AppCompatActivity {
 
         profilePicture = (ImageView) findViewById(R.id.imageView);
         loadImageButton = (Button) findViewById(R.id.buttonProfilepicture);
+        createUserButton = (Button) findViewById(R.id.button3);
 
         loadImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +59,90 @@ public class JobSeekerActivity extends AppCompatActivity {
                 openGallery();
             }
         });
+
+         // Get contact with the db
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                String firstname = jsonObject.getString("firstname"); // MÅ MATCHE DB!!
+                                String lastname = jsonObject.getString("lastname");
+                                String home = jsonObject.getString("home");
+                                String information = jsonObject.getString("information");
+                                User newUser = new User(firstname, lastname, home, information);
+                                users.add(newUser);
+                                Log.d("tester å: ", "Legg til arbeidstaker");
+                            }
+                            adapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse (VolleyError error){
+                        Log.e("volley,",error.toString());
+                    }
+                });
+        requestQueue.add(jsonArrayRequest);
+        // ^^^^^^
+
+
+        // det over skal fungere
+
+        //final EditText messageText = (EditText) findViewById(R.id.messageText);
+
+        messageText.setOnEditorActionListener(new EditText.OnEditorActionListener() { //createUserButtons skal inn her
+            @Override
+            public boolean onEditorAction(TextView v, int actionid, KeyEvent event) { // on click lisnter?
+                if (actionid == EditorInfo.IME_ACTION_SEND) {
+                    String newMessage = messageText.getText().toString(); // sjekke om knapp er trykt
+                    if (newMessage.equals("")) {
+                        return false;
+                    } else {
+                        System.out.println("Legg til ny bruker her! ");
+                        User user = new User(user.getID(),user.getFirstname(), user.getLastname(), user.getHome(),user.getInformation());//newMessage, contactName, conversationId);
+
+                        JSONObject jsonObject = new JSONObject();
+                        try {
+                            jsonObject.put("id", user.getID());
+                            jsonObject.put("firstname", user.getFirstname());
+                            jsonObject.put("lastname", user.getLastname() );
+                            jsonObject.put("home", user.getHome());
+                            jsonObject.put("information", user.getInformation());
+                            Log.d("test", "put json");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
+                                new Response.Listener<JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        Log.d("resp", response.toString());
+                                    }
+                                }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.d("test", "Error test");
+                            }
+                        });
+                        requestQueue.add(jsonObjectRequest);
+                        adapter.add(user);
+                       // messageText.setText("");
+                        return true;
+                    }
+                }
+                return false;
+
+            }
+        });
+
+
     }
 
     private void openGallery(){

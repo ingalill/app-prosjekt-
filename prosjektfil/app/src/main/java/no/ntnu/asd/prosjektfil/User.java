@@ -1,62 +1,79 @@
 package no.ntnu.asd.prosjektfil;
 
+import java.io.Serializable;
+
 /**
  * Created by martin on 27.10.2016.
  */
 
-public class User {
+public class User implements Serializable {
 
-    private String FIRSTNAME;
-    private String LASTNAME;
-    private Long ID;
-    private String HOME;
-    private String INFORMATION;
+    private String firstname;
+    private String lastname;
+    private Long id;
+    private String home;
+    private String information;
 
-    public User(String FIRSTNAME, String LASTNAME, Long ID, String HOME, String INFORMATION){
-        this.FIRSTNAME = FIRSTNAME;
-        this.LASTNAME = LASTNAME;
-        this.ID = ID;
-        this.HOME = HOME;
-        this.INFORMATION = INFORMATION;
+    public User(String firstname, String lastname,String home, String information){ // Long id
+        this.firstname = firstname;
+        this.lastname = lastname;
+        //this.id = id;
+        this.home = home;
+        this.information = information;
     }
 
-    public String getFIRSTNAME() {
-        return FIRSTNAME;
+    public User(Long id,String firstname, String lastname,String home, String information){
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.id = id;
+        this.home = home;
+        this.information = information;
     }
 
-    public void setFIRSTNAME(String FIRSTNAME) {
-        this.FIRSTNAME = FIRSTNAME;
+    public String getFirstname() {
+
+        return firstname;
     }
 
-    public String getLASTNAME() {
-        return LASTNAME;
+    public void setFirstname(String firstname) {
+
+        this.firstname = firstname;
     }
 
-    public void setLASTNAME(String LASTNAME) {
-        this.LASTNAME = LASTNAME;
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+
+        this.lastname = lastname;
     }
 
     public Long getID() {
-        return ID;
+
+        return id;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+   /*public void setID(Long id) {
+        this.id = id;
+    } */
+
+    public String getHome() {
+        return home;
     }
 
-    public String getHOME() {
-        return HOME;
+    public void setHome(String home) {
+
+        this.home = home;
     }
 
-    public void setHOME(String HOME) {
-        this.HOME = HOME;
+    public String getInformation() {
+
+        return information;
     }
 
-    public String getINFORMATION() {
-        return INFORMATION;
-    }
+    public void setInformation(String information) {
 
-    public void setINFORMATION(String INFORMATION) {
-        this.INFORMATION = INFORMATION;
+        this.information = information;
     }
 }
