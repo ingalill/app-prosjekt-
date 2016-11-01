@@ -15,23 +15,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text=""
         android:hint="Fornavn..."
         android:ems="10"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/editText" />
+        android:id="@+id/firstname" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text=""
+        android:inputType="text"
         android:hint="Etternavn..."
         android:ems="10"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/firstname"
         android:layout_alignParentStart="true"
-        android:id="@+id/editText2" />
+        android:id="@+id/lastname" />
 
     <Button
         android:text="Opprett bruker"
@@ -54,32 +52,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text=""
         android:hint="Adresse...."
         android:ems="10"
-        android:id="@+id/editText3"
-        android:layout_below="@+id/editText2"
+        android:id="@+id/address"
+        android:layout_below="@+id/lastname"
         android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text=""
         android:hint="Mobilnr..."
         android:ems="10"
-        android:id="@+id/editText5"
-        android:layout_below="@+id/editText3"
+        android:id="@+id/phone"
+        android:layout_below="@+id/address"
         android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:inputType="textPersonName"
-        android:text=""
         android:hint="Fortell om deg selv..."
         android:ems="10"
-        android:id="@+id/editText4"
+        android:id="@+id/information"
         android:layout_above="@+id/button3"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="17dp"
@@ -90,8 +85,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonProfilepicture"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/lastname"
         android:layout_alignParentEnd="true" />
-
-
 </RelativeLayout>

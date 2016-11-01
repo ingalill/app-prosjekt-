@@ -9,13 +9,18 @@ import android.util.Log;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -23,34 +28,50 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JobSeekerActivity extends AppCompatActivity {
 
+     // code 400 --> dårlig respons for http:// lalal
     ImageView profilePicture;
     Button loadImageButton;
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
-
-                            // husk å bytte ip adresse til din egen.
-    public static final String url ="http://158.38.193.13:8080/RESTapiv2/webresources/userprofile";
     RequestQueue requestQueue;
-    private ArrayList<User> users  = new ArrayList<User>();
+    // husk å bytte ip adresse til din egen.
+    public static final String URL = "http://10.0.0.31:8080/RESTapiv2/webresources/userprofile";
+    public static final String KEY_FIRSTNAME = "firstname";
+    public static final String KEY_LASTNAME = "lastname";
+    public static final String KEY_HOME = "home";
+    public static final String KEY_PHONE = "phone";
+    public static final String KEY_INFORMATION = "information";
+
+    private ArrayList<User> users = new ArrayList<User>();
     private Button createUserButton;
+    private EditText EditTextFirstname;
+    private EditText EditTextLastname;
+    private EditText EditTextPhone;
+    private EditText EditTextHome;
+    private EditText EditTextInformation;
     private UserAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_seeker);
+        adapter = new UserAdapter(this, users);
 
         profilePicture = (ImageView) findViewById(R.id.imageView);
         loadImageButton = (Button) findViewById(R.id.buttonProfilepicture);
         createUserButton = (Button) findViewById(R.id.button3);
-
-        adapter = new UserAdapter(this,users);
-        //createUserButton.setAdapter(adapter);
-        //userList.setAdapter(adapter);
-
+        //input fields
+        EditTextFirstname = (EditText) findViewById(R.id.firstname);
+        EditTextLastname = (EditText) findViewById(R.id.lastname);
+        EditTextHome = (EditText) findViewById(R.id.address);
+        EditTextPhone = (EditText) findViewById(R.id.phone);
+        EditTextInformation = (EditText) findViewById(R.id.information);
 
         getRequestQueue();
 
@@ -61,86 +82,80 @@ public class JobSeekerActivity extends AppCompatActivity {
             }
         });
 
-         // Get contact with the db
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            for (int i = 0; i < response.length(); i++) {
-                                JSONObject jsonObject = response.getJSONObject(i);
-                                String firstname = jsonObject.getString("firstname"); // MÅ MATCHE DB!!
-                                String lastname = jsonObject.getString("lastname");
-                                String home = jsonObject.getString("home");
-                                String phone = jsonObject.getString("phone");
-                                String information = jsonObject.getString("information");
-                                User newUser = new User(firstname, lastname, home,phone, information);
-                                users.add(newUser);
-                                Log.d("tester å: ", "Legg til arbeidstaker");
-                            }
-                            adapter.notifyDataSetChanged();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener(){
-                    @Override
-                    public void onErrorResponse (VolleyError error){
-                        Log.e("volley,",error.toString());
-                    }
-                });
-        requestQueue.add(jsonArrayRequest);
-        // ^^^^^^
 
-
-        // det over skal fungere
-
-
+        // feil her en plass
         createUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User us = new User();
-                //System.out.println("Legg til ny bruker her! ");
-                User user = new User(us.getID(), us.getFirstname(), us.getLastname(), us.getHome(), us.getPhone(), us.getInformation());
-
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("id", user.getID());
-                    jsonObject.put("firstname", user.getFirstname());
-                    jsonObject.put("lastname", user.getLastname());
-                    jsonObject.put("home", user.getHome());
-                    jsonObject.put("phone", user.getPhone());
-                    jsonObject.put("information", user.getInformation());
-                    Log.d("test", "put json");
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (v == createUserButton) {
+                    registerJobSeeker();
                 }
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                Log.d("resp", response.toString());
-                            }
-                        }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.d("test", "Error test",error);
-                            }
-                        });
-                requestQueue.add(jsonObjectRequest);
-                adapter.add(user);
-                Intent intent = new Intent(getApplicationContext(), ListUserActivity.class);
-                startActivity(intent);
             }
         }
         );
 
     } // end of onCreate
 
+    private void registerJobSeeker() {
+        final String firstname = EditTextFirstname.getText().toString().trim();
+        final String lastname = EditTextLastname.getText().toString().trim();
+        final String home = EditTextHome.getText().toString().trim();
+        final String phone = EditTextPhone.getText().toString().trim();
+        final String information = EditTextInformation.getText().toString().trim();
+
+        User user = new User();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id", user.getID());
+            jsonObject.put(KEY_FIRSTNAME, firstname);
+            jsonObject.put(KEY_LASTNAME, lastname);
+            jsonObject.put(KEY_HOME, home);
+            jsonObject.put(KEY_PHONE, phone);
+            jsonObject.put(KEY_INFORMATION, information);
+            Log.d("test", "put json HALLLOOOOO");
+            requestQueue.stop();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("resp", response.toString());
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("test", "Error test", error);
+                Toast.makeText(JobSeekerActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+
+        requestQueue.add(jsonObjectRequest);
+        adapter.add(user);
+        Intent intent = new Intent(getApplicationContext(), ListUserActivity.class);
+        startActivity(intent);
+    }
+
+
     /**
      * If there is no requestQueue then its create a new reqeustQueue
+     *
      * @return requestQueue
      */
     public RequestQueue getRequestQueue() {
@@ -150,15 +165,15 @@ public class JobSeekerActivity extends AppCompatActivity {
         return requestQueue;
     }
 
-    private void openGallery(){
+    private void openGallery() {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(gallery, PICK_IMAGE);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode,resultCode,data);
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageUri = data.getData();
             profilePicture.setImageURI(imageUri);
         }

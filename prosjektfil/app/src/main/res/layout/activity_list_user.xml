@@ -10,10 +10,30 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="no.ntnu.asd.prosjektfil.ListUserActivity">
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/userList" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonClick"
+        android:text="Push me"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewTest"
+        android:layout_alignParentStart="true" />
+
+
+
 </RelativeLayout>
+
+<!--
+ <ListView 
+ android:layout_width="match_parent" 
+   android:layout_height="match_parent" 
+    android:layout_alignParentTop="true" 
+     android:layout_alignParentStart="true" 
+       android:id="@+id/userList" />
+
+ -->
