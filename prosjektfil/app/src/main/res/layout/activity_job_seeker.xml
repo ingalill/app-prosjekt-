@@ -14,16 +14,6 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="Fornavn..."
-        android:ems="10"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/firstname" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:inputType="text"
         android:hint="Etternavn..."
         android:ems="10"
@@ -51,7 +41,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:hint="Adresse...."
         android:ems="10"
         android:id="@+id/address"
@@ -61,7 +51,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:hint="Mobilnr..."
         android:ems="10"
         android:id="@+id/phone"
@@ -71,7 +61,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="200dp"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:hint="Fortell om deg selv..."
         android:ems="10"
         android:id="@+id/information"
@@ -87,4 +77,14 @@
         android:id="@+id/buttonProfilepicture"
         android:layout_below="@+id/lastname"
         android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="Fornavn..."
+        android:ems="10"
+        android:id="@+id/firstname"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

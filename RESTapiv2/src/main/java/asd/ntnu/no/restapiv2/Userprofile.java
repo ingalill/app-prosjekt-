@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -30,12 +32,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Userprofile.findByFirstname", query = "SELECT u FROM Userprofile u WHERE u.firstname = :firstname")
     , @NamedQuery(name = "Userprofile.findByLastname", query = "SELECT u FROM Userprofile u WHERE u.lastname = :lastname")
     , @NamedQuery(name = "Userprofile.findByHome", query = "SELECT u FROM Userprofile u WHERE u.home = :home")
+    , @NamedQuery(name = "Userprofile.findByPhone", query ="SELECT u FROM Userprofile u WHERE u.phone = :phone")    
     , @NamedQuery(name = "Userprofile.findByInformation", query = "SELECT u FROM Userprofile u WHERE u.information = :information")})
 public class Userprofile implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @NotNull
     @Column(name = "ID")
     private Integer id;
@@ -51,12 +55,23 @@ public class Userprofile implements Serializable {
     @Size(max = 100)
     @Column(name = "INFORMATION")
     private String information;
+    @Size(max = 10)
+    @Column(name = "PHONE")
+    private String phone;
 
     public Userprofile() {
     }
 
     public Userprofile(Integer id) {
         this.id = id;
+    }
+    
+    public String getPhone(){
+        return phone;
+    }
+    
+    public void setPhone(String phone){
+        this.phone = phone;
     }
 
     public Integer getId() {
