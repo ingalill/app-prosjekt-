@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package asd.ntnu.no.restapiv2.service;
+package asd.ntnu.no.restapiv3.service;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
 
 /**
  *
- * @author inga lill bjølstad
+ * @author ingalill
  */
 @javax.ws.rs.ApplicationPath("webresources")
 public class ApplicationConfig extends Application {
@@ -29,7 +29,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(asd.ntnu.no.restapiv2.service.UserprofileFacadeREST.class);
+        resources.add(asd.ntnu.no.restapiv3.service.UserprofileFacadeREST.class);
     }
     
 }

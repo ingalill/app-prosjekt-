@@ -34,7 +34,7 @@ public class ListUserActivity extends AppCompatActivity {
     TextView textViewTest;
     Button buttonClick;
 
-    public static final String url ="http://10.0.0.31:8080/RESTapiv2/";
+    public static final String url =  "http://10.0.0.31:8080/RESTapiv3";  //"http://10.0.0.31:8080/RESTapiv2/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class ListUserActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(String response) {
                                 textViewTest.setText(response);
-                                requestQueue.stop();
+                               // requestQueue.stop();
                                 Log.d("test", "virke det???");
                             }
                         },
@@ -61,7 +61,7 @@ public class ListUserActivity extends AppCompatActivity {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 textViewTest.setText("Something went wrong");
-                                requestQueue.stop();
+                               // requestQueue.stop();
                             }
                         });
                 requestQueue.add(stringRequest);

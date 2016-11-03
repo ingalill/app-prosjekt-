@@ -35,6 +35,11 @@ public class User implements Serializable {
         this.information = information;
     }
 
+    // kaaaanskje??
+    public void setID(Long newID){
+        this.id = newID;
+    }
+
     public String getFirstname() {
 
         return firstname;

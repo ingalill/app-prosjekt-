@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:hint="Etternavn..."
-        android:ems="10"
+
         android:layout_below="@+id/firstname"
         android:layout_alignParentStart="true"
         android:id="@+id/lastname" />
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:hint="Adresse...."
-        android:ems="10"
+
         android:id="@+id/address"
         android:layout_below="@+id/lastname"
         android:layout_alignParentStart="true" />
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:hint="Mobilnr..."
-        android:ems="10"
+
         android:id="@+id/phone"
         android:layout_below="@+id/address"
         android:layout_alignParentStart="true" />
@@ -63,7 +63,7 @@
         android:layout_height="200dp"
         android:inputType="text"
         android:hint="Fortell om deg selv..."
-        android:ems="10"
+
         android:id="@+id/information"
         android:layout_above="@+id/button3"
         android:layout_alignParentStart="true"
@@ -83,8 +83,9 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:hint="Fornavn..."
-        android:ems="10"
+
         android:id="@+id/firstname"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 </RelativeLayout>
+<!--     android:ems="10" i alle EditText felt -->

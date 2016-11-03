@@ -20,7 +20,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -34,13 +33,14 @@ import java.util.Map;
 public class JobSeekerActivity extends AppCompatActivity {
 
      // code 400 --> dårlig respons for http:// lalal
+    // code 500 --> server error
     ImageView profilePicture;
     Button loadImageButton;
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
     RequestQueue requestQueue;
-    // husk å bytte ip adresse til din egen.
-    public static final String URL = "http://10.0.0.31:8080/RESTapiv2/webresources/userprofile";
+    // husk å bytte ip adresse til din egen. //10.0.0.31
+    public static final String URL = "http://10.0.0.31:8080/RESTapiv3/webresources/userprofile/";  //"http://10.0.0.31:8080/RESTapiv2/webresources/userprofile";
     public static final String KEY_FIRSTNAME = "firstname";
     public static final String KEY_LASTNAME = "lastname";
     public static final String KEY_HOME = "home";
@@ -54,6 +54,8 @@ public class JobSeekerActivity extends AppCompatActivity {
     private EditText EditTextPhone;
     private EditText EditTextHome;
     private EditText EditTextInformation;
+    private int id = 1;
+    int fID = 0;
     private UserAdapter adapter;
 
 
@@ -72,7 +74,6 @@ public class JobSeekerActivity extends AppCompatActivity {
         EditTextHome = (EditText) findViewById(R.id.address);
         EditTextPhone = (EditText) findViewById(R.id.phone);
         EditTextInformation = (EditText) findViewById(R.id.information);
-
         getRequestQueue();
 
         loadImageButton.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +97,22 @@ public class JobSeekerActivity extends AppCompatActivity {
 
     } // end of onCreate
 
+
+  /*  public int findId(){
+        View v = findViewById(id); //find the right id.
+        while (v != null){
+            v = findViewById(++id);
+        }
+        return id++;
+    } */
+
+
+
+    public int findUnusedId() {
+        while( findViewById(++fID) != null );
+        return fID;
+    }
+
     private void registerJobSeeker() {
         final String firstname = EditTextFirstname.getText().toString().trim();
         final String lastname = EditTextLastname.getText().toString().trim();
@@ -106,14 +123,17 @@ public class JobSeekerActivity extends AppCompatActivity {
         User user = new User();
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("id", user.getID());
+            View.generateViewId();
+
+            jsonObject.put("id", findUnusedId());
             jsonObject.put(KEY_FIRSTNAME, firstname);
             jsonObject.put(KEY_LASTNAME, lastname);
             jsonObject.put(KEY_HOME, home);
             jsonObject.put(KEY_PHONE, phone);
             jsonObject.put(KEY_INFORMATION, information);
             Log.d("test", "put json HALLLOOOOO");
-            requestQueue.stop();
+            Log.d("test","FUNKER ID??????? " + findUnusedId());
+            //requestQueue.stop();
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -129,10 +149,10 @@ public class JobSeekerActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("test", "Error test", error);
+                Log.d("test", "Error test i blir gal", error);
                 Toast.makeText(JobSeekerActivity.this, error.toString(), Toast.LENGTH_LONG).show();
             }
-        }) {
+        }); /*{ //
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
@@ -144,7 +164,7 @@ public class JobSeekerActivity extends AppCompatActivity {
             public String getBodyContentType() {
                 return "application/json";
             }
-        };
+        };*/
 
         requestQueue.add(jsonObjectRequest);
         adapter.add(user);

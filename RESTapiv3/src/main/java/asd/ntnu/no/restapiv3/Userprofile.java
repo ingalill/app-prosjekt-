@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package asd.ntnu.no.restapiv2;
+package asd.ntnu.no.restapiv3;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -20,26 +18,25 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @version 03.11.2016
- * @author inga lill bjølstad
+ *
+ * @author ingalill
  */
 @Entity
 @Table(name = "USERPROFILE")
 @XmlRootElement
 @NamedQueries({
-      @NamedQuery(name = "Userprofile.findAll", query = "SELECT u FROM Userprofile u")
+    @NamedQuery(name = "Userprofile.findAll", query = "SELECT u FROM Userprofile u")
     , @NamedQuery(name = "Userprofile.findById", query = "SELECT u FROM Userprofile u WHERE u.id = :id")
     , @NamedQuery(name = "Userprofile.findByFirstname", query = "SELECT u FROM Userprofile u WHERE u.firstname = :firstname")
     , @NamedQuery(name = "Userprofile.findByLastname", query = "SELECT u FROM Userprofile u WHERE u.lastname = :lastname")
     , @NamedQuery(name = "Userprofile.findByHome", query = "SELECT u FROM Userprofile u WHERE u.home = :home")
-    , @NamedQuery(name = "Userprofile.findByPhone", query ="SELECT u FROM Userprofile u WHERE u.phone = :phone")    
-    , @NamedQuery(name = "Userprofile.findByInformation", query = "SELECT u FROM Userprofile u WHERE u.information = :information")})
+    , @NamedQuery(name = "Userprofile.findByInformation", query = "SELECT u FROM Userprofile u WHERE u.information = :information")
+    , @NamedQuery(name = "Userprofile.findByPhone", query = "SELECT u FROM Userprofile u WHERE u.phone = :phone")})
 public class Userprofile implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @NotNull
     @Column(name = "ID")
     private Integer id;
@@ -55,6 +52,7 @@ public class Userprofile implements Serializable {
     @Size(max = 100)
     @Column(name = "INFORMATION")
     private String information;
+    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     @Size(max = 10)
     @Column(name = "PHONE")
     private String phone;
@@ -64,14 +62,6 @@ public class Userprofile implements Serializable {
 
     public Userprofile(Integer id) {
         this.id = id;
-    }
-    
-    public String getPhone(){
-        return phone;
-    }
-    
-    public void setPhone(String phone){
-        this.phone = phone;
     }
 
     public Integer getId() {
@@ -114,6 +104,14 @@ public class Userprofile implements Serializable {
         this.information = information;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -136,7 +134,7 @@ public class Userprofile implements Serializable {
 
     @Override
     public String toString() {
-        return "asd.ntnu.no.restapiv2.Userprofile[ id=" + id + " ]";
+        return "asd.ntnu.no.restapiv3.Userprofile[ id=" + id + " ]";
     }
     
 }
