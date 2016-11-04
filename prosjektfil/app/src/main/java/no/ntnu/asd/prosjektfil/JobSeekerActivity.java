@@ -39,8 +39,8 @@ public class JobSeekerActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
     RequestQueue requestQueue;
-    // husk å bytte ip adresse til din egen. //10.0.0.31
-    public static final String URL = "http://10.0.0.31:8080/RESTapiv3/webresources/userprofile/";  //"http://10.0.0.31:8080/RESTapiv2/webresources/userprofile";
+    // husk å bytte ip adresse til din egen. //10.0.0.31 //158.38.193.12
+    public static final String URL = "http://158.38.193.12:8080/RESTapiv3/webresources/userprofile/";  //"http://10.0.0.31:8080/RESTapiv2/webresources/userprofile";
     public static final String KEY_FIRSTNAME = "firstname";
     public static final String KEY_LASTNAME = "lastname";
     public static final String KEY_HOME = "home";
@@ -54,7 +54,6 @@ public class JobSeekerActivity extends AppCompatActivity {
     private EditText EditTextPhone;
     private EditText EditTextHome;
     private EditText EditTextInformation;
-    private int id = 1;
     int fID = 0;
     private UserAdapter adapter;
 
@@ -83,8 +82,6 @@ public class JobSeekerActivity extends AppCompatActivity {
             }
         });
 
-
-        // feil her en plass
         createUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,17 +94,10 @@ public class JobSeekerActivity extends AppCompatActivity {
 
     } // end of onCreate
 
-
-  /*  public int findId(){
-        View v = findViewById(id); //find the right id.
-        while (v != null){
-            v = findViewById(++id);
-        }
-        return id++;
-    } */
-
-
-
+    /**
+     * Generates a unused id.
+     * @return
+     */
     public int findUnusedId() {
         while( findViewById(++fID) != null );
         return fID;
@@ -133,7 +123,7 @@ public class JobSeekerActivity extends AppCompatActivity {
             jsonObject.put(KEY_INFORMATION, information);
             Log.d("test", "put json HALLLOOOOO");
             Log.d("test","FUNKER ID??????? " + findUnusedId());
-            //requestQueue.stop();
+
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -152,7 +142,7 @@ public class JobSeekerActivity extends AppCompatActivity {
                 Log.d("test", "Error test i blir gal", error);
                 Toast.makeText(JobSeekerActivity.this, error.toString(), Toast.LENGTH_LONG).show();
             }
-        }); /*{ //
+        }); /*{ //Sjekk hjemme om det fungerer. 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();

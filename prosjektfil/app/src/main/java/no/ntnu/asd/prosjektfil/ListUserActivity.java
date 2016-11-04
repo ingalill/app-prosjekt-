@@ -33,8 +33,8 @@ public class ListUserActivity extends AppCompatActivity {
     UserAdapter userAdapter;    // Definerer adapter
     TextView textViewTest;
     Button buttonClick;
-
-    public static final String url =  "http://10.0.0.31:8080/RESTapiv3";  //"http://10.0.0.31:8080/RESTapiv2/";
+                                       //158.38.193.12 // 10.0.0.31
+    public static final String url =  "http://158.38.193.12:8080/RESTapiv3";  //"http://10.0.0.31:8080/RESTapiv2/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

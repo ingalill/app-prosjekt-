@@ -21,8 +21,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- *
- * @author ingalill
+ * @version 03.11.2014
+ * @author inga lill
  */
 @Stateless
 @Path("userprofile")
