@@ -9,12 +9,15 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -22,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author ingalill
  */
 @Entity
-@Table(name = "USERPROFILE")
+@XmlAccessorType(XmlAccessType.FIELD) // test
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Userprofile.findAll", query = "SELECT u FROM Userprofile u")
@@ -33,42 +36,37 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Userprofile.findByInformation", query = "SELECT u FROM Userprofile u WHERE u.information = :information")
     , @NamedQuery(name = "Userprofile.findByPhone", query = "SELECT u FROM Userprofile u WHERE u.phone = :phone")})
 public class Userprofile implements Serializable {
-
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID")
-    private Integer id;
+    @Id @GeneratedValue
+    private Long id;
+    
     @Size(max = 20)
-    @Column(name = "FIRSTNAME")
     private String firstname;
+
     @Size(max = 20)
-    @Column(name = "LASTNAME")
     private String lastname;
+    
     @Size(max = 50)
-    @Column(name = "HOME")
     private String home;
+
     @Size(max = 100)
-    @Column(name = "INFORMATION")
     private String information;
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     @Size(max = 10)
-    @Column(name = "PHONE")
     private String phone;
 
     public Userprofile() {
     }
 
-    public Userprofile(Integer id) {
+    public Userprofile(Long id) {
         this.id = id;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

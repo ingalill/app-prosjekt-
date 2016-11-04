@@ -7,9 +7,11 @@ package asd.ntnu.no.restapiv3.service;
 
 import asd.ntnu.no.restapiv3.Userprofile;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.sql.DataSource;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -26,8 +28,12 @@ import javax.ws.rs.core.MediaType;
  */
 @Stateless
 @Path("userprofile")
+@Produces(MediaType.APPLICATION_JSON)
 public class UserprofileFacadeREST extends AbstractFacade<Userprofile> {
 
+   // @Resource(mappedName="jdbc/Profile")
+    //DataSource dataSource;
+    
     @PersistenceContext(unitName = "asd.ntnu.no_RESTapiv3_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -37,14 +43,15 @@ public class UserprofileFacadeREST extends AbstractFacade<Userprofile> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({/*MediaType.APPLICATION_XML,*/ MediaType.APPLICATION_JSON})
     public void create(Userprofile entity) {
+        System.out.println("Hello from create " + entity);
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({/*MediaType.APPLICATION_XML,*/ MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Userprofile entity) {
         super.edit(entity);
     }
@@ -57,21 +64,21 @@ public class UserprofileFacadeREST extends AbstractFacade<Userprofile> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({/*MediaType.APPLICATION_XML, */MediaType.APPLICATION_JSON})
     public Userprofile find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({/*MediaType.APPLICATION_XML,*/ MediaType.APPLICATION_JSON})
     public List<Userprofile> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({/*MediaType.APPLICATION_XML,*/ MediaType.APPLICATION_JSON})
     public List<Userprofile> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }

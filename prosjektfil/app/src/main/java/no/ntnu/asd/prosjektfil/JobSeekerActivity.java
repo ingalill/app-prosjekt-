@@ -39,8 +39,8 @@ public class JobSeekerActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
     RequestQueue requestQueue;
-    // husk å bytte ip adresse til din egen. //10.0.0.31 //158.38.193.12
-    public static final String URL = "http://158.38.193.12:8080/RESTapiv3/webresources/userprofile/";  //"http://10.0.0.31:8080/RESTapiv2/webresources/userprofile";
+    // husk å bytte ip adresse til din egen. //10.0.0.31 //158.38.193.12 // denne er feil link
+    public static final String URL = "http://158.38.141.48:8080/RESTapiv3/webresources/userprofile";  //"http://10.0.0.31:8080/RESTapiv2/webresources/userprofile";
     public static final String KEY_FIRSTNAME = "firstname";
     public static final String KEY_LASTNAME = "lastname";
     public static final String KEY_HOME = "home";
@@ -96,7 +96,7 @@ public class JobSeekerActivity extends AppCompatActivity {
 
     /**
      * Generates a unused id.
-     * @return
+     * @return fID
      */
     public int findUnusedId() {
         while( findViewById(++fID) != null );
@@ -115,20 +115,20 @@ public class JobSeekerActivity extends AppCompatActivity {
         try {
             View.generateViewId();
 
-            jsonObject.put("id", findUnusedId());
             jsonObject.put(KEY_FIRSTNAME, firstname);
             jsonObject.put(KEY_LASTNAME, lastname);
             jsonObject.put(KEY_HOME, home);
             jsonObject.put(KEY_PHONE, phone);
             jsonObject.put(KEY_INFORMATION, information);
-            Log.d("test", "put json HALLLOOOOO");
-            Log.d("test","FUNKER ID??????? " + findUnusedId());
+            Log.d("test", jsonObject.toString());
+
+           // Log.d("test","FUNKER ID??????? " + findUnusedId());
 
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+                                                                                   //POST
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -137,24 +137,12 @@ public class JobSeekerActivity extends AppCompatActivity {
 
                     }
                 }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("test", "Error test i blir gal", error);
-                Toast.makeText(JobSeekerActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-            }
-        }); /*{ //Sjekk hjemme om det fungerer. 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json");
-                return headers;
-            }
-
-            @Override
-            public String getBodyContentType() {
-                return "application/json";
-            }
-        };*/
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("test", "Error test i blir gal", error);
+                        Toast.makeText(JobSeekerActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+            });
 
         requestQueue.add(jsonObjectRequest);
         adapter.add(user);

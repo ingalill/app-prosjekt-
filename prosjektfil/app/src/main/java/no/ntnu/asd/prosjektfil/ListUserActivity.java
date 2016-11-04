@@ -34,7 +34,7 @@ public class ListUserActivity extends AppCompatActivity {
     TextView textViewTest;
     Button buttonClick;
                                        //158.38.193.12 // 10.0.0.31
-    public static final String url =  "http://158.38.193.12:8080/RESTapiv3";  //"http://10.0.0.31:8080/RESTapiv2/";
+    public static final String url =  "http://158.38.141.48:8080/RESTapiv3"; ///webresources/userprofile";  //"http://10.0.0.31:8080/RESTapiv2/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
