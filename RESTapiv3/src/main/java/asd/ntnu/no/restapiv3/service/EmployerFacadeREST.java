@@ -5,7 +5,7 @@
  */
 package asd.ntnu.no.restapiv3.service;
 
-import asd.ntnu.no.restapiv3.Userprofile;
+import asd.ntnu.no.restapiv3.Employer;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -21,28 +21,25 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- * @version 03.11.2014
- * @author inga lill
+ * @version 07 november 2016
+ * @author inga lill bjølstad
  */
 @Stateless
-@Path("userprofile")
+@Path("employer")
 @Produces(MediaType.APPLICATION_JSON)
-public class UserprofileFacadeREST extends AbstractFacade<Userprofile> {
-
-   // @Resource(mappedName="jdbc/Profile")
-    //DataSource dataSource;
+public class EmployerFacadeREST  extends AbstractFacade<Employer>{
     
     @PersistenceContext(unitName = "asd.ntnu.no_RESTapiv3_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
-    public UserprofileFacadeREST() {
-        super(Userprofile.class);
+    public EmployerFacadeREST() {
+        super(Employer.class);
     }
 
     @POST
     @Override
     @Consumes({/*MediaType.APPLICATION_XML,*/ MediaType.APPLICATION_JSON})
-    public void create(Userprofile entity) {
+    public void create(Employer entity) {
     //    System.out.println("Hello from create " + entity);
         super.create(entity);
     }
@@ -50,7 +47,7 @@ public class UserprofileFacadeREST extends AbstractFacade<Userprofile> {
     @PUT
     @Path("{id}")
     @Consumes({/*MediaType.APPLICATION_XML,*/ MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, Userprofile entity) {
+    public void edit(@PathParam("id") Integer id, Employer entity) {
         super.edit(entity);
     }
 
@@ -63,21 +60,21 @@ public class UserprofileFacadeREST extends AbstractFacade<Userprofile> {
     @GET
     @Path("{id}")
     @Produces({/*MediaType.APPLICATION_XML, */MediaType.APPLICATION_JSON})
-    public Userprofile find(@PathParam("id") Integer id) {
+    public Employer find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({/*MediaType.APPLICATION_XML,*/ MediaType.APPLICATION_JSON})
-    public List<Userprofile> findAll() {
+    public List<Employer> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({/*MediaType.APPLICATION_XML,*/ MediaType.APPLICATION_JSON})
-    public List<Userprofile> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Employer> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 
@@ -93,4 +90,4 @@ public class UserprofileFacadeREST extends AbstractFacade<Userprofile> {
         return em;
     }
     
-}
+} // end of class

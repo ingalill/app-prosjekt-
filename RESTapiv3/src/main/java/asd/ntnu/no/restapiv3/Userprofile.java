@@ -21,8 +21,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author ingalill
+ * @version 
+ * @author inga lill
  */
 @Entity
 @XmlAccessorType(XmlAccessType.FIELD) // test
