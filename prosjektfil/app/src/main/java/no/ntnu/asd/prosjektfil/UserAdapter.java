@@ -31,7 +31,13 @@ public class UserAdapter extends ArrayAdapter<User>{
         }
 
         TextView userInfo = (TextView) convertView.findViewById(R.id.userInfo);
-        userInfo.setText("Name: " + user.getFirstname() + " " + user.getLastname());
+        userInfo.setText(user.getFirstname() + " " + user.getLastname());
+
+        TextView tvHome = (TextView) convertView.findViewById(R.id.tvHome);
+        tvHome.setText(user.getHome());
+
+        TextView tvInfo = (TextView) convertView.findViewById(R.id.tvInfo);
+        tvInfo.setText(user.getInformation());
 
         ImageView userImage = (ImageView)convertView.findViewById(R.id.userImage);
         userImage.setImageResource(R.drawable.thumb);
