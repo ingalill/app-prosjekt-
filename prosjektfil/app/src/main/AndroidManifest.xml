@@ -26,5 +26,25 @@
 </manifest><!--
     inn i <application android:...
 
+<<<<<<< HEAD
     android:networkSecurityConfig="@xml/network_security_config"
 -->
+
+
+<!--
+*** *** *** *** *** *** *** *** *** ***
+ <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchActivity"/>
+*** denne skal inn i mainActivity?? ***
+
+<activity
+            android:name=".SearchActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable" android:resource="@xml/searchable"/>
+        </activity>
+
+-->
+

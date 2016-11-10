@@ -10,20 +10,39 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="no.ntnu.asd.prosjektfil.ListUserActivity">
 
-
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonClick"
-        android:text="Push me"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/lastname"
+        android:layout_toEndOf="@+id/firstname" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textViewTest"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/firstname"
+        android:layout_below="@+id/lastname"
+        android:layout_toEndOf="@+id/information" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/home"
+        android:layout_below="@+id/firstname"
+        android:layout_toEndOf="@+id/information" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/phone"
+        android:layout_below="@+id/home"
+        android:layout_toEndOf="@+id/home" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/information"
+        android:layout_below="@+id/phone"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

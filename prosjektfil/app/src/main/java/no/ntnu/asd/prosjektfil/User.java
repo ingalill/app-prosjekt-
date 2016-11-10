@@ -26,19 +26,14 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public User(Long id,String firstname, String lastname,String home, String phone, String information){
+   /* public User(String firstname, String lastname,String home, String phone, String information){
         this.firstname = firstname;
         this.lastname = lastname;
         this.id = id;
         this.home = home;
         this.phone = phone;
         this.information = information;
-    }
-
-    // kaaaanskje??
-    public void setID(Long newID){
-        this.id = newID;
-    }
+    }*/
 
     public String getFirstname() {
 

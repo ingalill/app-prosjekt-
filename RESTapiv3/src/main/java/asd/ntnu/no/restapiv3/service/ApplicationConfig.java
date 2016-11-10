@@ -29,6 +29,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(asd.ntnu.no.restapiv3.service.EmployerFacadeREST.class);
         resources.add(asd.ntnu.no.restapiv3.service.UserprofileFacadeREST.class);
     }
     
