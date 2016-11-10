@@ -49,6 +49,7 @@ public class JobSeekerActivity extends AppCompatActivity {
     private EditText EditTextHome;
     private EditText EditTextInformation;
     private UserAdapter adapter;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +86,6 @@ public class JobSeekerActivity extends AppCompatActivity {
         );
 
 
-
-
     } // end of onCreate
 
     private void registerJobSeeker() {
@@ -96,9 +95,8 @@ public class JobSeekerActivity extends AppCompatActivity {
         final String phone = EditTextPhone.getText().toString().trim();
         final String information = EditTextInformation.getText().toString().trim();
 
-        User user = new User();
+       // User user = new User();
         JSONObject jsonObject = new JSONObject();
-        //JSONArray jsonArray = new JSONArray();
         try {
             View.generateViewId();
 
@@ -108,6 +106,8 @@ public class JobSeekerActivity extends AppCompatActivity {
             jsonObject.put(KEY_PHONE, phone);
             jsonObject.put(KEY_INFORMATION, information);
             Log.d("test", jsonObject.toString());
+
+            user = new User(firstname,lastname,home,phone,information);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -130,7 +130,7 @@ public class JobSeekerActivity extends AppCompatActivity {
 
         requestQueue.add(jsonObjectRequest);
         adapter.add(user);
-        Intent intent = new Intent(getApplicationContext(), ListUserActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class); //ListUserActivity
         startActivity(intent);
     }
 

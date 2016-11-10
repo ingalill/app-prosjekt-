@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -41,6 +43,10 @@ public class UserAdapter extends ArrayAdapter<User>{
 
         ImageView userImage = (ImageView)convertView.findViewById(R.id.userImage);
         userImage.setImageResource(R.drawable.thumb);
+
+
+        TextView tvPhone = (TextView)convertView.findViewById(R.id.phone);
+        tvPhone.setText(user.getPhone());
 
         return convertView;
      }

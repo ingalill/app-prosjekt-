@@ -50,4 +50,12 @@
         android:paddingTop="6dp"
         android:paddingBottom="6dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="mobil numer"
+        android:id="@+id/phone"
+        android:layout_below="@+id/userImage"
+        android:layout_toEndOf="@+id/userImage" />
+
 </RelativeLayout>

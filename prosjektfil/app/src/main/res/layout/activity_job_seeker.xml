@@ -30,7 +30,7 @@
         android:layout_marginTop="15dp" />
 
     <TextView
-        android:text="Adresse:"
+        android:text="Bosted:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewAdress"
@@ -85,10 +85,10 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:text=""
-        android:hint="....."
+        android:hint="..."
         android:ems="10"
         android:layout_below="@+id/textViewAdress"
-        android:layout_alignEnd="@+id/editTextMobilnr"
+        android:layout_alignEnd="@+id/phone"
         android:id="@+id/address" />
 
     <Button
@@ -99,7 +99,7 @@
         android:textSize="10sp"
         android:ems="10"
         android:id="@+id/buttonProfilepicture"
-        android:layout_above="@+id/editTextEtternavn"
+        android:layout_above="@+id/lastname"
         android:layout_alignParentEnd="true" />
 
 
@@ -139,7 +139,6 @@
         app:srcCompat="@mipmap/ic_launcher"
         android:id="@+id/imageView"
         android:layout_marginStart="14dp"
-
         android:layout_above="@+id/buttonProfilepicture"
         android:layout_toEndOf="@+id/buttonCreateUser" />
 
