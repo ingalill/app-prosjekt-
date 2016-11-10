@@ -84,17 +84,8 @@ public class JobSeekerActivity extends AppCompatActivity {
         }
         );
 
-        Intent i = new Intent(JobSeekerActivity.this, MyProfileActivity.class);
-        String strFirstname = EditTextFirstname.getText().toString();
-        String strLastname = EditTextLastname.getText().toString();
-        String strPhoneNr = EditTextPhone.getText().toString();
-        String strAdress = EditTextHome.getText().toString();
-        String strInfo = EditTextInformation.getText().toString();
-        i.putExtra("FIRSTNAME_STRING", strFirstname);
-        i.putExtra("LASTNAME_STRING", strLastname);
-        i.putExtra("PHONENUMBER_STRING",strPhoneNr);
-        i.putExtra("ADRESS_STRING",strAdress);
-        i.putExtra("INFO_STRING",strInfo);
+
+
 
     } // end of onCreate
 
