@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="no.ntnu.asd.prosjektfil">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:windowSoftInputMode="adjustNothing"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:windowSoftInputMode="adjustNothing">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,14 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListUserActivity"></activity>
-        <activity android:name=".JobSeekerActivity"></activity>
+        <activity android:name=".ListUserActivity" />
+        <activity android:name=".JobSeekerActivity" />
+        <activity android:name=".MyProfileActivity"></activity>
     </application>
 
-
-</manifest>
-
-    <!--
+</manifest><!--
     inn i <application android:...
 
-    android:networkSecurityConfig="@xml/network_security_config" -->
+    android:networkSecurityConfig="@xml/network_security_config"
+-->
