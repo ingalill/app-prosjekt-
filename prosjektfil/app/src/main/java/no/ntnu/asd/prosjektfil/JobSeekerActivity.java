@@ -6,29 +6,23 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class JobSeekerActivity extends AppCompatActivity {
 
@@ -40,7 +34,7 @@ public class JobSeekerActivity extends AppCompatActivity {
     Uri imageUri;
     RequestQueue requestQueue;
     // husk å bytte ip adresse til din egen. //10.0.0.31 //158.38.193.12 // denne er feil link
-    public static final String URL = "http://158.38.141.48:8080/RESTapiv3/webresources/userprofile";  //"http://10.0.0.31:8080/RESTapiv2/webresources/userprofile";
+    public static final String URL = "http://158.38.193.9:8080/RESTapiv3/webresources/userprofile";  //"http://10.0.0.31:8080/RESTapiv2/webresources/userprofile";
     public static final String KEY_FIRSTNAME = "firstname";
     public static final String KEY_LASTNAME = "lastname";
     public static final String KEY_HOME = "home";
@@ -54,9 +48,7 @@ public class JobSeekerActivity extends AppCompatActivity {
     private EditText EditTextPhone;
     private EditText EditTextHome;
     private EditText EditTextInformation;
-    int fID = 0;
     private UserAdapter adapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,15 +86,6 @@ public class JobSeekerActivity extends AppCompatActivity {
 
     } // end of onCreate
 
-    /**
-     * Generates a unused id.
-     * @return fID
-     */
-    public int findUnusedId() {
-        while( findViewById(++fID) != null );
-        return fID;
-    }
-
     private void registerJobSeeker() {
         final String firstname = EditTextFirstname.getText().toString().trim();
         final String lastname = EditTextLastname.getText().toString().trim();
@@ -112,6 +95,7 @@ public class JobSeekerActivity extends AppCompatActivity {
 
         User user = new User();
         JSONObject jsonObject = new JSONObject();
+        //JSONArray jsonArray = new JSONArray();
         try {
             View.generateViewId();
 
@@ -122,13 +106,10 @@ public class JobSeekerActivity extends AppCompatActivity {
             jsonObject.put(KEY_INFORMATION, information);
             Log.d("test", jsonObject.toString());
 
-           // Log.d("test","FUNKER ID??????? " + findUnusedId());
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-                                                                                   //POST
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject,
                 new Response.Listener<JSONObject>() {
                     @Override
