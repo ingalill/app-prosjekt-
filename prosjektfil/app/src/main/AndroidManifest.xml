@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".ListUserActivity" />
         <activity android:name=".JobSeekerActivity" />
-        <activity android:name=".MyProfileActivity"></activity>
+        <activity android:name=".MyProfileActivity" />
+        <activity android:name=".CameraActivity"></activity>
     </application>
 
 </manifest><!--
@@ -28,10 +29,7 @@
 
 <<<<<<< HEAD
     android:networkSecurityConfig="@xml/network_security_config"
--->
-
-
-<!--
+--><!--
 *** *** *** *** *** *** *** *** *** ***
  <meta-data
                 android:name="android.app.default_searchable"
@@ -45,6 +43,4 @@
             </intent-filter>
             <meta-data android:name="android.app.searchable" android:resource="@xml/searchable"/>
         </activity>
-
 -->
-
