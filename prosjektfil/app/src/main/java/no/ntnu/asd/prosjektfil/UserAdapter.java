@@ -27,6 +27,11 @@ public class UserAdapter extends ArrayAdapter<User>{
         this.userItems = users;
     }
 
+    @Override
+    public int getCount(){
+        return userItems.size();
+    }
+
     @NonNull
     @Override
      public View getView(int position, View convertView, ViewGroup parent){
@@ -35,7 +40,6 @@ public class UserAdapter extends ArrayAdapter<User>{
         if (convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.user_row, parent, false);
         }
-        //User u = userItems.get(position);
 
         TextView userInfo = (TextView) convertView.findViewById(R.id.userInfo);
         userInfo.setText(user.getFirstname() + " " + user.getLastname());
@@ -52,6 +56,10 @@ public class UserAdapter extends ArrayAdapter<User>{
 
         TextView tvPhone = (TextView)convertView.findViewById(R.id.phone);
         tvPhone.setText(user.getPhone());
+
+        /*
+        Qualification
+         */
 
         return convertView;
      }

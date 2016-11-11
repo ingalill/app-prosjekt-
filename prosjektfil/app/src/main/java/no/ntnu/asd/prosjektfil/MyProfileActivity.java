@@ -15,6 +15,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 /**
  * Om vi får tid til å fikse innlogging skal linje 50 om JSONObject jsonResponse bli endret.
+ *
+ * Created by Inga
+
  */
 public class MyProfileActivity extends AppCompatActivity {
 
@@ -46,7 +49,7 @@ public class MyProfileActivity extends AppCompatActivity {
 
                         try {
                             for (int i = 0; i < response.length(); i++) {
-                                JSONObject jsonResponse = response.getJSONObject(response.length()-1);
+                                JSONObject jsonResponse = response.getJSONObject(response.length()-1); // viser den siste personen i lista.
                                 String firstname = jsonResponse.getString("firstname");
                                 String lastname = jsonResponse.getString("lastname");
                                 String phone = jsonResponse.getString("phone");

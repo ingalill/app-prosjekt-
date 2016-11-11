@@ -1,10 +1,12 @@
 package no.ntnu.asd.prosjektfil;
 
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -18,19 +20,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/*
+ * Created by ingalill
+ */
 public class ListUserActivity extends AppCompatActivity {
 
      // inn her skal det var get user
     private ListView userList;          // Definerer listview
     private UserAdapter userAdapter;    // Definerer adapter
     private List<User> users = new ArrayList<User>();
+    private User user;
                                        //158.38.193.12 // 10.0.0.31
-    public static final String url =  "http://158.38.193.14:8080/RESTapiv3/webresources/userprofile";
-    private TextView TextFirstname;
-    private TextView TextLastname;
-    private TextView TextPhone;
-    private TextView TextHome;
-    private TextView TextInformation;
+    public static final String URL =  "http://158.38.193.14:8080/RESTapiv3/webresources/userprofile";
     private RequestQueue requestQueue;
 
 
@@ -38,18 +39,16 @@ public class ListUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_user);
+        user = new User();
 
         userList = (ListView)findViewById(R.id.userList);
-
-       /* TextFirstname = (TextView) findViewById(R.id.firstname);
-        TextLastname = (TextView) findViewById(R.id.lastname);
-        TextHome = (TextView) findViewById(R.id.home);
-        TextInformation = (TextView)findViewById(R.id.information);
-        TextPhone = (TextView) findViewById(R.id.phone); */
+        userAdapter = new UserAdapter(this,users);
+        userList.setAdapter(userAdapter);
+        setTitle("Jobb søkere");
 
         getRequestQueue();
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(/*Request.Method.GET,*/ url,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -59,32 +58,22 @@ public class ListUserActivity extends AppCompatActivity {
                                 JSONObject jsonResponse = response.getJSONObject(i);
                                 User user = new User();
                                 user.setFirstname(jsonResponse.getString("firstname"));
+
+                               // if(jsonResponse.has("lastname"))
                                 user.setLastname(jsonResponse.getString("lastname"));
                                 user.setInformation(jsonResponse.getString("information"));
                                 user.setHome(jsonResponse.getString("home"));
                                 user.setPhone(jsonResponse.getString("phone"));
 
+                                users.add(user);
 
-
-                                /*String firstname = jsonResponse.getString("firstname");
-                                String lastname = jsonResponse.getString("lastname");
-                                String phone = jsonResponse.getString("phone");
-                                String information = jsonResponse.getString("information");
-                                String home = jsonResponse.getString("home");
-                                System.out.println("Inni json Array request, fungerer dette mon tro?"); */
-
-                            /*  TextFirstname.setText(firstname);
-                                TextLastname.setText(lastname);
-                                TextHome.setText(home);
-                                TextPhone.setText(phone);
-                                TextInformation.setText(information); */
+                                System.out.println("Funker det: " + user.getFirstname());
                             }
+                            userAdapter.notifyDataSetChanged();
                         }
                         catch(JSONException e){
                             e.printStackTrace();
-
                         }
-
                     }
                 }, new Response.ErrorListener() {
                         @Override
@@ -94,6 +83,35 @@ public class ListUserActivity extends AppCompatActivity {
         );
         requestQueue.add(jsonArrayRequest);
     } // end of on create
+
+
+    /**
+     * Not in use at the moment.
+     */
+    public void listViewClicker(){
+    userList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class);
+
+            String firstname = userAdapter.getItem(position).getFirstname();
+            intent.putExtra("contactName", firstname);
+            startActivity(intent);
+        }
+    });
+
+}
+    /*
+    on click functions skal inn.
+    Intent intent  = new Intent(getApplicationContext(), xx.class);
+    String firstname = userAdapter.getItem(position).getName();
+    intent.putExtra("firstname",firstname);
+    startActivity(intent);
+
+    inn i xx.class
+    contactName = intent.getStringExtra("firstname");
+     */
 
 
     /**
@@ -111,3 +129,32 @@ public class ListUserActivity extends AppCompatActivity {
 
 
 } // end of class
+
+   /* private TextView TextFirstname;
+    private TextView TextLastname;
+    private TextView TextPhone;
+    private TextView TextHome;
+    private TextView TextInformation; */
+
+ /* TextFirstname = (TextView) findViewById(R.id.firstname);
+        TextL***astname = (TextView) findViewById(R.id.lastname);
+        TextHome = (TextView) findViewById(R.id.home);
+        TextInformation = (TextView)findViewById(R.id.information);
+        TextPhone = (TextView) findViewById(R.id.phone); */
+/*
+
+try...
+was inside for()...
+  /*String firstname = jsonResponse.getString("firstname");
+                                String lastname = jsonResponse.getString("lastname");
+                                String phone = jsonResponse.getString("phone");
+                                String information = jsonResponse.getString("information");
+                                String home = jsonResponse.getString("home");
+                                System.out.println("Inni json Array request, fungerer dette mon tro?"); */
+
+                            /*  TextFirstname.setText(firstname);
+                                TextLastname.setText(lastname);
+                                TextHome.setText(home);
+                                TextPhone.setText(phone);
+                                TextInformation.setText(information); */
+

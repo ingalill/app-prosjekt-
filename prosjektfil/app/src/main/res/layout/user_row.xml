@@ -34,7 +34,7 @@
     <TextView
         android:text="Qualification"
         android:layout_height="wrap_content"
-        android:id="@+id/textView4"
+        android:id="@+id/qualification"
         android:layout_width="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/userImage"
