@@ -22,7 +22,7 @@ public class ListUserActivity extends AppCompatActivity {
     UserAdapter userAdapter;    // Definerer adapter
 
                                        //158.38.193.12 // 10.0.0.31
-    public static final String url =  "http://158.38.193.9:8080/RESTapiv3/webresources/userprofile";
+    public static final String url =  "http://158.38.193.14:8080/RESTapiv3/webresources/userprofile";
     private TextView TextFirstname;
     private TextView TextLastname;
     private TextView TextPhone;
@@ -35,6 +35,8 @@ public class ListUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_user);
+
+        userList = (ListView)findViewById(R.id.userList);
 
        /* TextFirstname = (TextView) findViewById(R.id.firstname);
         TextLastname = (TextView) findViewById(R.id.lastname);

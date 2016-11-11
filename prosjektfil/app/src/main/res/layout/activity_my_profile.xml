@@ -113,7 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewCV2"
         android:layout_marginTop="10dp"
-        android:id="@+id/textViewCV3"
+        android:id="@+id/cv"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true" />
 

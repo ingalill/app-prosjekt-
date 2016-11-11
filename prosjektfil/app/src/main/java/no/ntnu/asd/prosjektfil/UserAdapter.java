@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,8 +20,11 @@ import java.util.List;
 
 public class UserAdapter extends ArrayAdapter<User>{
 
+    private List<User> userItems;
+
     public UserAdapter(Context context, List<User> users){
         super(context, 0, users);
+        this.userItems = users;
     }
 
     @NonNull
@@ -31,6 +35,7 @@ public class UserAdapter extends ArrayAdapter<User>{
         if (convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.user_row, parent, false);
         }
+        //User u = userItems.get(position);
 
         TextView userInfo = (TextView) convertView.findViewById(R.id.userInfo);
         userInfo.setText(user.getFirstname() + " " + user.getLastname());

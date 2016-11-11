@@ -34,7 +34,7 @@ public class JobSeekerActivity extends AppCompatActivity {
     Uri imageUri;
     RequestQueue requestQueue;
     // husk å bytte ip adresse til din egen. //10.0.0.31 //158.38.193.12 // denne er feil link
-    public static final String URL = "http://158.38.193.9:8080/RESTapiv3/webresources/userprofile";  //"http://10.0.0.31:8080/RESTapiv2/webresources/userprofile";
+    public static final String URL = "http://158.38.193.14:8080/RESTapiv3/webresources/userprofile";  //"http://10.0.0.31:8080/RESTapiv2/webresources/userprofile";
     public static final String KEY_FIRSTNAME = "firstname";
     public static final String KEY_LASTNAME = "lastname";
     public static final String KEY_HOME = "home";
@@ -95,7 +95,6 @@ public class JobSeekerActivity extends AppCompatActivity {
         final String phone = EditTextPhone.getText().toString().trim();
         final String information = EditTextInformation.getText().toString().trim();
 
-       // User user = new User();
         JSONObject jsonObject = new JSONObject();
         try {
             View.generateViewId();
@@ -107,7 +106,8 @@ public class JobSeekerActivity extends AppCompatActivity {
             jsonObject.put(KEY_INFORMATION, information);
             Log.d("test", jsonObject.toString());
 
-            user = new User(firstname,lastname,home,phone,information);
+         //   user = new User(firstname,lastname,home,phone,information);
+            System.out.println(user);
 
         } catch (JSONException e) {
             e.printStackTrace();
