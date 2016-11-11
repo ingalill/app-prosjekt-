@@ -106,7 +106,7 @@ public class JobSeekerActivity extends AppCompatActivity {
             jsonObject.put(KEY_INFORMATION, information);
             Log.d("test", jsonObject.toString());
 
-         //   user = new User(firstname,lastname,home,phone,information);
+            user = new User(firstname,lastname,home,phone,information);
             System.out.println(user);
 
         } catch (JSONException e) {

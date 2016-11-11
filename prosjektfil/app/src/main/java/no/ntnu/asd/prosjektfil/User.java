@@ -32,10 +32,11 @@ public class User implements Serializable {
     }
 
     public String getPhone(){
+
         return phone;
     }
 
-    public void getPhone(String phone){
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

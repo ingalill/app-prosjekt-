@@ -13,7 +13,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+/**
+ * Om vi får tid til å fikse innlogging skal linje 50 om JSONObject jsonResponse bli endret.
+ */
 public class MyProfileActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
@@ -35,7 +37,6 @@ public class MyProfileActivity extends AppCompatActivity {
         TextInformation = (TextView)findViewById(R.id.cv);
         TextPhone = (TextView) findViewById(R.id.textViewMobNr3);
 
-
         getRequestQueue();
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL,
@@ -44,21 +45,20 @@ public class MyProfileActivity extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
 
                         try {
-                            //for (int i = 0; i < response.length(); i++) {
+                            for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonResponse = response.getJSONObject(response.length()-1);
                                 String firstname = jsonResponse.getString("firstname");
                                 String lastname = jsonResponse.getString("lastname");
                                 String phone = jsonResponse.getString("phone");
                                 String information = jsonResponse.getString("information");
                                 String home = jsonResponse.getString("home");
-                               // System.out.println("Inni json Array request, fungerer dette mon tro?");
 
                                 TextFirstname.setText(firstname);
                                 TextLastname.setText(lastname);
                                 TextHome.setText(home);
                                 TextPhone.setText(phone);
                                 TextInformation.setText(information);
-                           // }
+                            }
                         }
                         catch(JSONException e){
                             e.printStackTrace();

@@ -14,13 +14,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ListUserActivity extends AppCompatActivity {
 
      // inn her skal det var get user
-    ListView userList;          // Definerer listview
-    UserAdapter userAdapter;    // Definerer adapter
-
+    private ListView userList;          // Definerer listview
+    private UserAdapter userAdapter;    // Definerer adapter
+    private List<User> users = new ArrayList<User>();
                                        //158.38.193.12 // 10.0.0.31
     public static final String url =  "http://158.38.193.14:8080/RESTapiv3/webresources/userprofile";
     private TextView TextFirstname;
@@ -54,9 +57,18 @@ public class ListUserActivity extends AppCompatActivity {
                         try {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonResponse = response.getJSONObject(i);
-                                String firstname = jsonResponse.getString("firstname");
+                                User user = new User();
+                                user.setFirstname(jsonResponse.getString("firstname"));
+                                user.setLastname(jsonResponse.getString("lastname"));
+                                user.setInformation(jsonResponse.getString("information"));
+                                user.setHome(jsonResponse.getString("home"));
+                                user.setPhone(jsonResponse.getString("phone"));
+
+
+
+                                /*String firstname = jsonResponse.getString("firstname");
                                 String lastname = jsonResponse.getString("lastname");
-                                /*String phone = jsonResponse.getString("phone");
+                                String phone = jsonResponse.getString("phone");
                                 String information = jsonResponse.getString("information");
                                 String home = jsonResponse.getString("home");
                                 System.out.println("Inni json Array request, fungerer dette mon tro?"); */
