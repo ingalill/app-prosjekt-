@@ -71,7 +71,10 @@ public class JobSeekerActivity extends AppCompatActivity {
         loadImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGallery();
+                //TODO: Her må galleri og kamerafunksjonen samkjøres på et vis
+                //openGallery();
+                Intent intent = new Intent(JobSeekerActivity.this, CameraActivity.class);
+                startActivity(intent);
             }
         });
 
