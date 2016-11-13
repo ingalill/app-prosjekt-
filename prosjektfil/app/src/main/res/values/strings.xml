@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">prosjektfil</string>
+    <string name="search_hint">search hint</string>
+    <string name="search_description"> search description </string>
+    <string name="action_settings">Settings</string>
+    <string name="app_label">Jobbsøker applikasjon</string>
 </resources>
