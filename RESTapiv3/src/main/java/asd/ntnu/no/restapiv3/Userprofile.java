@@ -81,6 +81,7 @@ public class Userprofile implements Serializable {
     public String getLastname() {
         return lastname;
     }
+    
 
     public void setLastname(String lastname) {
         this.lastname = lastname;

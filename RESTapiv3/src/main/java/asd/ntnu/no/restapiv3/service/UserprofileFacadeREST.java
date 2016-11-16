@@ -41,7 +41,7 @@ public class UserprofileFacadeREST extends AbstractFacade<Userprofile> {
 
     @POST
     @Override
-    @Consumes({/*MediaType.APPLICATION_XML,*/ MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
     public void create(Userprofile entity) {
     //    System.out.println("Hello from create " + entity);
         super.create(entity);
@@ -49,7 +49,7 @@ public class UserprofileFacadeREST extends AbstractFacade<Userprofile> {
 
     @PUT
     @Path("{id}")
-    @Consumes({/*MediaType.APPLICATION_XML,*/ MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Userprofile entity) {
         super.edit(entity);
     }
@@ -62,21 +62,22 @@ public class UserprofileFacadeREST extends AbstractFacade<Userprofile> {
 
     @GET
     @Path("{id}")
-    @Produces({/*MediaType.APPLICATION_XML, */MediaType.APPLICATION_JSON})
-    public Userprofile find(@PathParam("id") Integer id) {
+    @Produces({MediaType.APPLICATION_JSON})
+    public Userprofile find(@PathParam("id") Long id) { // find metoden fungerer kun på primary key. 
         return super.find(id);
-    }
-
+    } 
+   
+    
     @GET
     @Override
-    @Produces({/*MediaType.APPLICATION_XML,*/ MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public List<Userprofile> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({/*MediaType.APPLICATION_XML,*/ MediaType.APPLICATION_JSON})
+    @Produces({ MediaType.APPLICATION_JSON})
     public List<Userprofile> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
