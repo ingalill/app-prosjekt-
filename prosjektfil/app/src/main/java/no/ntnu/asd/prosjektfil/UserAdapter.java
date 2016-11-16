@@ -29,6 +29,7 @@ public class UserAdapter extends ArrayAdapter<User>{
 
     @Override
     public int getCount(){
+
         return userItems.size();
     }
 

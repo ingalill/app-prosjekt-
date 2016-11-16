@@ -39,7 +39,7 @@
 <!--
 
  <meta-data  android:name="android.app.default_searchable" android:value=".SearchActivity"/>
- denne skal inn i mainActivity??
+ denne skal inn i mainActivity?? skal inn i mainActivity om vi ønsker å ha søke muligheter der.
 
  -->
 

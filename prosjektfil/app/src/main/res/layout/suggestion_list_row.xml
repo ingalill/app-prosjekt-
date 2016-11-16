@@ -6,11 +6,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dine søkeresultater: "/>
+        android:id="@+id/text1"/>
 
-    <ListView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/searchResult">
-    </ListView>
+        android:id="@+id/text2"/>
+
 </LinearLayout>
