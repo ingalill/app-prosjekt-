@@ -6,9 +6,12 @@ import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import java.io.ByteArrayOutputStream;
 
 public class CameraActivity extends AppCompatActivity {
 
@@ -48,6 +51,12 @@ public class CameraActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap photo = (Bitmap) extras.get("data");
             imageView.setImageBitmap(photo);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            photo.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] b = baos.toByteArray();
+
+            String encodedImage = Base64.encodeToString(b , Base64.DEFAULT);
         }
     }
 }
