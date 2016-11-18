@@ -18,6 +18,7 @@ public class CameraActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     ImageView imageView;
+    byte[] b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +45,6 @@ public class CameraActivity extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
     }
 
-
-
     //If you want to return the image taken
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -55,21 +54,18 @@ public class CameraActivity extends AppCompatActivity {
             Bitmap photo = (Bitmap) extras.get("data");
             //imageView.setImageBitmap(photo);
 
-            // Convert the Bitmap image to byte array.
+            // Convert the Bitmap to byte array.
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             photo.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] b = baos.toByteArray();
-            // Convert the byte array to string via Base64.
-            String encodedImage = Base64.encodeToString(b , Base64.DEFAULT);
-            //System.out.print("Image.toString" + encodedImage);
-            System.out.print("String lengde: ");
-            System.out.println(encodedImage.length());
+            b = baos.toByteArray();
 
-            // Convert Base64 string to byte array
-            byte[] bb = Base64.decode(encodedImage , Base64.DEFAULT);
             // Convert byte array to Bitmap
-            Bitmap bitmap = BitmapFactory.decodeByteArray(bb, 0, bb.length);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
             imageView.setImageBitmap(bitmap);
         }
+    }
+
+    public byte[] getB() {
+        return b;
     }
 }
