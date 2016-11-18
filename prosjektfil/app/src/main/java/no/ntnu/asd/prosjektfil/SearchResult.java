@@ -26,9 +26,8 @@ import java.util.List;
 public class SearchResult extends AppCompatActivity{
 
     private RequestQueue requestQueue;
-    public static final String URL = "http://10.0.0.31:8080/RESTapiv3/webresources/userprofile/search/"; //+ query;
+    public static final String URL = "http://10.0.0.31:8080/RESTapiv3/webresources/userprofile/";
     private TextView TextFirstname;
-    private String query;
     private TextView TextLastname;
     private TextView TextPhone;
     private TextView TextHome;

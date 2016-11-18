@@ -3,9 +3,14 @@
     android:label="@string/app_label"
     android:hint="@string/search_hint"
     android:voiceSearchMode="showVoiceSearchButton|launchRecognizer"
-    android:searchSuggestAuthority="no.ntnu.asd.prosjektfil.SuggestionProvider"
-    android:searchSuggestIntentAction="android.intent.action.VIEW"
-    android:searchSuggestSelection=" ?"
+
     android:searchSettingsDescription="@string/search_description"
     >
 </searchable>
+<!--
+
+ android:searchSuggestAuthority="no.ntnu.asd.prosjektfil.SuggestionProvider"
+    android:searchSuggestIntentAction="android.intent.action.VIEW"
+    android:searchSuggestSelection=" ?"
+
+-->

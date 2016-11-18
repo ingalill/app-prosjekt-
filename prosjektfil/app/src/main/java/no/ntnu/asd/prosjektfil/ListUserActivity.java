@@ -96,7 +96,7 @@ public class ListUserActivity extends AppCompatActivity {
     }
 
     /**
-     * Not in use at the moment.
+     *
      */
     public void listViewClicker() {
         userList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

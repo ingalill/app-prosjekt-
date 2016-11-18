@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             }
-        });*/
+        });
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,5 +58,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
         });
+    } */
     }
 }

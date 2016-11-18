@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -70,18 +71,11 @@ public class UserprofileFacadeREST extends AbstractFacade<Userprofile> {
     @GET
     @Path("search/{query}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Userprofile findByName(@PathParam("query") String query) {
-        Query q = getEntityManager().createNamedQuery("Userprofile.findByFirstname");
+    public List<Userprofile> findByName(@PathParam("query") String query) {
+        TypedQuery<Userprofile> q = getEntityManager().createNamedQuery("Userprofile.findByFirstname",Userprofile.class);
         q.setParameter("firstname", query);
-        q.setMaxResults(1);
-        Object result = q.getSingleResult();
-        if (result == null) {
-            return null;
-        }
-        return (Userprofile) result;
-        //return em.createQuery("select u from Userprofile u", Userprofile.class).getResultList();
-        //return q;//super.findByName(query);
-        // return null;
+        q.setMaxResults(4); // får de fire første søkeresultatene.
+        return q.getResultList();
     }
 
     @GET

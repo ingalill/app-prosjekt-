@@ -37,8 +37,9 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity {
 
     private ListView searchResults;
-    private UserAdapter adapter;
-    private List<User> users = new ArrayList<>();
+    //private UserAdapter adapter;
+    private ArrayAdapter adapter;
+   // private List<User> users = new ArrayList<>();
     public static final String URL = "http://158.38.193.13:8080/RESTapiv3/webresources/userprofile/search/";
 
     private RequestQueue requestQueue;
@@ -47,18 +48,17 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        handleIntent(getIntent()); // test
         getRequestQueue();
 
         searchResults = (ListView) findViewById(R.id.searchResult);
-        adapter = new UserAdapter(this, users);
+        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
         searchResults.setAdapter(adapter);
 
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this, SuggestionProvider.AUTHORITY, SuggestionProvider.MODE);
-            suggestions.saveRecentQuery(query, null);
+           // SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this, SuggestionProvider.AUTHORITY, SuggestionProvider.MODE);
+            //suggestions.saveRecentQuery(query, null);
             doSearch(query);
         }
 
@@ -67,60 +67,65 @@ public class SearchActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 //får tak i navnet til kontakten man har valgt
-                String firstname = "";//= adapter.getItem(position);
+                String firstname = (String) adapter.getItem(position);
 
                 Intent i = new Intent(getApplicationContext(), SearchResult.class);
                 i.putExtra("firstname", firstname);
-                //i.putExtra(CONVERSATION_ID, conversationId);
                 startActivity(i);
             }
         });
     } // end of on create
 
-    public void onNewIntent(Intent intent) { //test
-        setIntent(intent);
-        handleIntent(intent);
-    }
-
-    private void handleIntent(Intent intent) { // test
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            doSearch(query);
-        }
-    }
-
-    // search for a message
-    private void doSearch(String query) {
-        // User user = new User();
-        query = query.toLowerCase();
-        List<User> result = new ArrayList<>();
-        for (User s : users) {
-            if (s.getFirstname().toLowerCase().compareTo(query) == 0) {
-                result.add(s);
-                System.out.println("hva inneholder " + s);
-                adapter.notifyDataSetChanged();
-            }
-
-        }
-        doPresentResult(result);
+    /*
+     * Search for a jobseeker.
+     */
+    private void doSearch(final String query) {
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL + query,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        List<User> result = new ArrayList<>();
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                System.out.println("Hvor er jeg?? "); // kommer hit
+
+                                JSONObject jsonResponse = response.getJSONObject(i);
+                                User user = new User();
+                                user.setFirstname(jsonResponse.getString("firstname"));
+                                if (user.getFirstname().compareTo(query) == 0) { // må endre user.getFirstname
+                                    user.setFirstname(jsonResponse.getString("firstname"));
+                                    user.setLastname(jsonResponse.getString("lastname"));
+                                    user.setInformation(jsonResponse.getString("information"));
+                                    user.setHome(jsonResponse.getString("home"));
+                                    user.setPhone(jsonResponse.getString("phone"));
+                                    result.add(user);
+                                    System.out.println("KOMMER JEG HIT???? " + user);
+
+                                }
+                                //doPresentResult(result);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        doPresentResult(result);
                         System.out.println("Got: " + response);
                     }
                 }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                    }}
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("Do not work.. and the error is: " + error);
+            }
+        }
         );
+
         requestQueue.add(jsonArrayRequest);
     }
 
-    // present the results. Her skal List vekk. DomainSingleton skal vekk og byttes med db.
+    // present the results.
     private void doPresentResult(List<User> results) {
-        adapter.addAll(results);
+        adapter.addAll(results); // funker ikke
         adapter.notifyDataSetChanged();
     }
 
@@ -158,7 +163,6 @@ public class SearchActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-}
+} // end of class
 
 

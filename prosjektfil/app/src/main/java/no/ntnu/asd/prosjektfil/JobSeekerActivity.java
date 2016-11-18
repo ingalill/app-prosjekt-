@@ -107,6 +107,7 @@ public class JobSeekerActivity extends AppCompatActivity {
             jsonObject.put(KEY_HOME, home);
             jsonObject.put(KEY_PHONE, phone);
             jsonObject.put(KEY_INFORMATION, information);
+            // put password
             Log.d("test", jsonObject.toString());
 
             user = new User(firstname,lastname,home,phone,information);
