@@ -164,4 +164,14 @@ public class JobSeekerActivity extends AppCompatActivity {
             profilePicture.setImageURI(imageUri);
         }
     }
+
+    @Override
+    public void onStop(){
+        requestQueue.cancelAll(new RequestQueue.RequestFilter() {
+            @Override
+            public boolean apply(Request<?> request) {
+                return true;
+            }
+        });
+    }
 }

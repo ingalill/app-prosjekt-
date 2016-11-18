@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -67,7 +68,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 //får tak i navnet til kontakten man har valgt
-                String firstname = (String) adapter.getItem(position);
+                String firstname = (String) adapter.getItem(position); // FUNKER IKKE!
 
                 Intent i = new Intent(getApplicationContext(), SearchResult.class);
                 i.putExtra("firstname", firstname);
@@ -88,7 +89,7 @@ public class SearchActivity extends AppCompatActivity {
                         List<User> result = new ArrayList<>();
                         try {
                             for (int i = 0; i < response.length(); i++) {
-                                System.out.println("Hvor er jeg?? "); // kommer hit
+                                //System.out.println("Hvor er jeg?? "); // kommer hit
 
                                 JSONObject jsonResponse = response.getJSONObject(i);
                                 User user = new User();
@@ -100,10 +101,8 @@ public class SearchActivity extends AppCompatActivity {
                                     user.setHome(jsonResponse.getString("home"));
                                     user.setPhone(jsonResponse.getString("phone"));
                                     result.add(user);
-                                    System.out.println("KOMMER JEG HIT???? " + user);
-
+                                    // System.out.println("KOMMER JEG HIT???? " + user);
                                 }
-                                //doPresentResult(result);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -125,7 +124,7 @@ public class SearchActivity extends AppCompatActivity {
 
     // present the results.
     private void doPresentResult(List<User> results) {
-        adapter.addAll(results); // funker ikke
+        adapter.addAll(results);
         adapter.notifyDataSetChanged();
     }
 
@@ -139,6 +138,16 @@ public class SearchActivity extends AppCompatActivity {
             requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
         return requestQueue;
+    }
+
+    @Override
+    public void onStop(){
+        requestQueue.cancelAll(new RequestQueue.RequestFilter() {
+            @Override
+            public boolean apply(Request<?> request) {
+                return true;
+            }
+        });
     }
 
     @Override

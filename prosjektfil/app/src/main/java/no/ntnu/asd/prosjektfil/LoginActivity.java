@@ -26,13 +26,13 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.passwordId);
         signUp = (TextView) findViewById(R.id.textViewSignUp);
 
-        /*signInButton.setOnClickListener(new View.OnClickListener() {
+        signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String uName = userName.getText().toString();
                 String pWord = password.getText().toString();
 
-                if(!uName.equals("") || !pWord.equals("")) {
+              /*  if(!uName.equals("") || !pWord.equals("")) {
 
                     //kjør innlogging og lagre brukernavn og passord til database
 
@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                                 "Wrong Username or Password, please try again",
                                 Toast.LENGTH_LONG).show();
                     }
-                }
+                }*/
             }
         });
 
@@ -58,6 +58,5 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
         });
-    } */
     }
 }

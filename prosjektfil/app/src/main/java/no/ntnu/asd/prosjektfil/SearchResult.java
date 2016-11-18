@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -95,6 +96,16 @@ public class SearchResult extends AppCompatActivity{
             requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
         return requestQueue;
+    }
+
+    @Override
+    public void onStop(){
+        requestQueue.cancelAll(new RequestQueue.RequestFilter() {
+            @Override
+            public boolean apply(Request<?> request) {
+                return true;
+            }
+        });
     }
 
 } // end of class
