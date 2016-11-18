@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     Button jobSekrButton;
     Button employerBtn;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
