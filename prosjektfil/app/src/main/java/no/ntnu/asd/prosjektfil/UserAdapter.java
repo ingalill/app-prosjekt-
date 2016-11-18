@@ -27,11 +27,11 @@ public class UserAdapter extends ArrayAdapter<User>{
         this.userItems = users;
     }
 
-    @Override
+    /*@Override
     public int getCount(){
 
         return userItems.size();
-    }
+    } */
 
     @NonNull
     @Override

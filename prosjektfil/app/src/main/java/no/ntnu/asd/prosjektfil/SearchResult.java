@@ -1,7 +1,10 @@
 package no.ntnu.asd.prosjektfil;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -14,16 +17,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 /**
- * Om vi får tid til å fikse innlogging skal linje 50 om JSONObject jsonResponse bli endret.
- * <p>
- * Created by Inga
+ * Created by ingalill on 17/11/2016.
  */
-public class MyProfileActivity extends AppCompatActivity {
+
+public class SearchResult extends AppCompatActivity{
 
     private RequestQueue requestQueue;
-    public static final String URL = "http://158.38.193.14:8080/RESTapiv3/webresources/userprofile";
+    public static final String URL = "http://10.0.0.31:8080/RESTapiv3/webresources/userprofile/search/"; //+ query;
     private TextView TextFirstname;
+    private String query;
     private TextView TextLastname;
     private TextView TextPhone;
     private TextView TextHome;
@@ -32,7 +37,11 @@ public class MyProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_profile);
+        setContentView(R.layout.search_result);
+
+        Intent intent = getIntent();
+        String firstname = intent.getStringExtra("firstname");
+        setTitle(intent.getStringExtra(firstname));
 
         TextFirstname = (TextView) findViewById(R.id.textViewFornavn3);
         TextLastname = (TextView) findViewById(R.id.textViewEtternavn3);
@@ -90,3 +99,5 @@ public class MyProfileActivity extends AppCompatActivity {
     }
 
 } // end of class
+
+
