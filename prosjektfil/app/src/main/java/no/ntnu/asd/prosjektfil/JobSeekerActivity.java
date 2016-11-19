@@ -135,6 +135,7 @@ public class JobSeekerActivity extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
         adapter.add(user);
         Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class);
+        intent.putExtra("firstname", firstname);
         startActivity(intent);
     }
 

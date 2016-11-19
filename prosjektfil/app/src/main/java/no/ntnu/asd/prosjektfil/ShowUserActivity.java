@@ -1,5 +1,6 @@
 package no.ntnu.asd.prosjektfil;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -41,6 +42,10 @@ public class ShowUserActivity extends AppCompatActivity {
 
         getRequestQueue();
 
+        Intent intent = getIntent();
+        final String intentFirstname = intent.getStringExtra("firstname");
+        setTitle(intent.getStringExtra(intentFirstname));
+
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -48,19 +53,23 @@ public class ShowUserActivity extends AppCompatActivity {
 
                         try {
                             for (int i = 0; i < response.length(); i++) {
-                                JSONObject jsonResponse = response.getJSONObject(response.length() - 1); // viser den siste personen i lista.
-                                String firstname = jsonResponse.getString("firstname");
-                                String lastname = jsonResponse.getString("lastname");
-                                String phone = jsonResponse.getString("phone");
-                                String information = jsonResponse.getString("information");
-                                String home = jsonResponse.getString("home");
 
-                                TextFirstname.setText(firstname);
-                                TextLastname.setText(lastname);
-                                TextHome.setText(home);
-                                TextPhone.setText(phone);
-                                TextInformation.setText(information);
-                                System.out.println("Hallo?" + firstname);
+                                JSONObject jsonResponse = response.getJSONObject(i);
+                                String firstname = jsonResponse.getString("firstname");
+                                if (firstname.compareTo(intentFirstname) == 0) {
+                                    //String firstname = jsonResponse.getString("firstname");
+                                    String lastname = jsonResponse.getString("lastname");
+                                    String phone = jsonResponse.getString("phone");
+                                    String information = jsonResponse.getString("information");
+                                    String home = jsonResponse.getString("home");
+
+                                    TextFirstname.setText(firstname);
+                                    TextLastname.setText(lastname);
+                                    TextHome.setText(home);
+                                    TextPhone.setText(phone);
+                                    TextInformation.setText(information);
+                                    System.out.println("Hallo?" + firstname);
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

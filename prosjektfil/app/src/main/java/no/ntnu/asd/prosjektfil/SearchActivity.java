@@ -51,13 +51,13 @@ public class SearchActivity extends AppCompatActivity {
         getRequestQueue();
 
         searchResults = (ListView) findViewById(R.id.searchResult);
-        searchAdapter = new UserAdapter(this,new ArrayList<User>()); // test
+        searchAdapter = new UserAdapter(this, new ArrayList<User>()); // test
         searchResults.setAdapter(searchAdapter);
 
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-           // SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this, SuggestionProvider.AUTHORITY, SuggestionProvider.MODE);
+            // SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this, SuggestionProvider.AUTHORITY, SuggestionProvider.MODE);
             //suggestions.saveRecentQuery(query, null);
             doSearch(query);
         }
@@ -67,8 +67,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 //får tak i navnet til kontakten man har valgt
-               String firstname = "inga";//(String) searchAdapter.getItem(position); // FUNKER IKKE!
-                // hardcoda. må få inn ritkig intet for å sende videre.
+                String firstname = searchAdapter.getItem(position).getFirstname();
                 Intent i = new Intent(getApplicationContext(), SearchResult.class);
                 i.putExtra("firstname", firstname);
                 startActivity(i);
