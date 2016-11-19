@@ -51,7 +51,7 @@ public class SearchActivity extends AppCompatActivity {
         getRequestQueue();
 
         searchResults = (ListView) findViewById(R.id.searchResult);
-        searchAdapter = new UserAdapter(this, new ArrayList<User>()); // test
+        searchAdapter = new UserAdapter(this, new ArrayList<User>());
         searchResults.setAdapter(searchAdapter);
 
         Intent intent = getIntent();
