@@ -43,7 +43,7 @@ public class ListUserActivity extends AppCompatActivity {
     private List<User> users = new ArrayList<>();
     private User user;
     //158.38.193.12 // 10.0.0.31
-    public static final String URL = "http://158.38.193.13:8080/RESTapiv3/webresources/userprofile";
+    public static final String URL = "http://158.38.193.7:8080/RESTapiv3/webresources/userprofile";
     private RequestQueue requestQueue;
 
     @Override
@@ -104,7 +104,7 @@ public class ListUserActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class); // endring skal inn her
 
                 String firstname = userAdapter.getItem(position).getFirstname();
                 intent.putExtra("firstname", firstname);
@@ -147,16 +147,6 @@ public class ListUserActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onStop(){
-        requestQueue.cancelAll(new RequestQueue.RequestFilter() {
-            @Override
-            public boolean apply(Request<?> request) {
-                return true;
-            }
-        });
     }
 
 } // end of class

@@ -27,7 +27,7 @@ import java.util.List;
 public class SearchResult extends AppCompatActivity{
 
     private RequestQueue requestQueue;
-    public static final String URL = "http://10.0.0.31:8080/RESTapiv3/webresources/userprofile/";
+    public static final String URL = "http://158.38.193.7:8080/RESTapiv3/webresources/userprofile/";
     private TextView TextFirstname;
     private TextView TextLastname;
     private TextView TextPhone;
@@ -40,8 +40,8 @@ public class SearchResult extends AppCompatActivity{
         setContentView(R.layout.search_result);
 
         Intent intent = getIntent();
-        String firstname = intent.getStringExtra("firstname");
-        setTitle(intent.getStringExtra(firstname));
+        final String intentFirstname = intent.getStringExtra("firstname");
+        setTitle(intent.getStringExtra(intentFirstname));
 
         TextFirstname = (TextView) findViewById(R.id.textViewFornavn3);
         TextLastname = (TextView) findViewById(R.id.textViewEtternavn3);
@@ -58,24 +58,26 @@ public class SearchResult extends AppCompatActivity{
 
                         try {
                             for (int i = 0; i < response.length(); i++) {
-                                JSONObject jsonResponse = response.getJSONObject(response.length() - 1); // viser den siste personen i lista.
+                                JSONObject jsonResponse = response.getJSONObject(i);
                                 String firstname = jsonResponse.getString("firstname");
-                                String lastname = jsonResponse.getString("lastname");
-                                String phone = jsonResponse.getString("phone");
-                                String information = jsonResponse.getString("information");
-                                String home = jsonResponse.getString("home");
+                                if (firstname.compareTo(intentFirstname) == 0) {
 
-                                TextFirstname.setText(firstname);
-                                TextLastname.setText(lastname);
-                                TextHome.setText(home);
-                                TextPhone.setText(phone);
-                                TextInformation.setText(information);
+                                    //firstname = jsonResponse.getString("firstname");
+                                    String lastname = jsonResponse.getString("lastname");
+                                    String phone = jsonResponse.getString("phone");
+                                    String information = jsonResponse.getString("information");
+                                    String home = jsonResponse.getString("home");
+
+                                    TextFirstname.setText(firstname);
+                                    TextLastname.setText(lastname);
+                                    TextHome.setText(home);
+                                    TextPhone.setText(phone);
+                                    TextInformation.setText(information);
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-
                         }
-
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -98,15 +100,6 @@ public class SearchResult extends AppCompatActivity{
         return requestQueue;
     }
 
-    @Override
-    public void onStop(){
-        requestQueue.cancelAll(new RequestQueue.RequestFilter() {
-            @Override
-            public boolean apply(Request<?> request) {
-                return true;
-            }
-        });
-    }
 
 } // end of class
 

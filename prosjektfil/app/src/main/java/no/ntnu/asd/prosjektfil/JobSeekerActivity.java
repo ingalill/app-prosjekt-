@@ -34,7 +34,7 @@ public class JobSeekerActivity extends AppCompatActivity {
     Uri imageUri;
     RequestQueue requestQueue;
     // husk å bytte ip adresse til din egen. //10.0.0.31 //158.38.193.12 // denne er feil link
-    public static final String URL = "http:/158.38.193.13:8080/RESTapiv3/webresources/userprofile";
+    public static final String URL = "http:/158.38.193.7:8080/RESTapiv3/webresources/userprofile";
     public static final String KEY_FIRSTNAME = "firstname";
     public static final String KEY_LASTNAME = "lastname";
     public static final String KEY_HOME = "home";
@@ -165,13 +165,4 @@ public class JobSeekerActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onStop(){
-        requestQueue.cancelAll(new RequestQueue.RequestFilter() {
-            @Override
-            public boolean apply(Request<?> request) {
-                return true;
-            }
-        });
-    }
 }

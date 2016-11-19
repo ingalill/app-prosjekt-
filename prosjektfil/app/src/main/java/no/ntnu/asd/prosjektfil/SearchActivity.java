@@ -38,10 +38,9 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity {
 
     private ListView searchResults;
-    //private UserAdapter adapter;
+    private UserAdapter searchAdapter;
     private ArrayAdapter adapter;
-   // private List<User> users = new ArrayList<>();
-    public static final String URL = "http://158.38.193.13:8080/RESTapiv3/webresources/userprofile/search/";
+    public static final String URL = "http://158.38.193.7:8080/RESTapiv3/webresources/userprofile/search/";
 
     private RequestQueue requestQueue;
 
@@ -52,8 +51,8 @@ public class SearchActivity extends AppCompatActivity {
         getRequestQueue();
 
         searchResults = (ListView) findViewById(R.id.searchResult);
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
-        searchResults.setAdapter(adapter);
+        searchAdapter = new UserAdapter(this,new ArrayList<User>()); // test
+        searchResults.setAdapter(searchAdapter);
 
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -68,8 +67,8 @@ public class SearchActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 //får tak i navnet til kontakten man har valgt
-                String firstname = (String) adapter.getItem(position); // FUNKER IKKE!
-
+               String firstname = "inga";//(String) searchAdapter.getItem(position); // FUNKER IKKE!
+                // hardcoda. må få inn ritkig intet for å sende videre.
                 Intent i = new Intent(getApplicationContext(), SearchResult.class);
                 i.putExtra("firstname", firstname);
                 startActivity(i);
@@ -89,7 +88,6 @@ public class SearchActivity extends AppCompatActivity {
                         List<User> result = new ArrayList<>();
                         try {
                             for (int i = 0; i < response.length(); i++) {
-                                //System.out.println("Hvor er jeg?? "); // kommer hit
 
                                 JSONObject jsonResponse = response.getJSONObject(i);
                                 User user = new User();
@@ -124,8 +122,8 @@ public class SearchActivity extends AppCompatActivity {
 
     // present the results.
     private void doPresentResult(List<User> results) {
-        adapter.addAll(results);
-        adapter.notifyDataSetChanged();
+        searchAdapter.addAll(results);
+        searchAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -138,16 +136,6 @@ public class SearchActivity extends AppCompatActivity {
             requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
         return requestQueue;
-    }
-
-    @Override
-    public void onStop(){
-        requestQueue.cancelAll(new RequestQueue.RequestFilter() {
-            @Override
-            public boolean apply(Request<?> request) {
-                return true;
-            }
-        });
     }
 
     @Override

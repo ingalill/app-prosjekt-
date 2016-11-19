@@ -38,50 +38,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Employer button
+        // Employeer button
         employerBtn = (Button) findViewById(R.id.button2);
         employerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ListUserActivity.class);
                 startActivity(intent);
             }
         });
     } // end of onCreate
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
-
-        MenuItem menuItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-        SearchManager sMngr = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchableInfo searchableInfo  = sMngr.getSearchableInfo(getComponentName());
-        searchView.setSearchableInfo(searchableInfo);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
-   /* @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }*/
 
 } // end of class.

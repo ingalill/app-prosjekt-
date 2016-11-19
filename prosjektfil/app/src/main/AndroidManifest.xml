@@ -34,6 +34,8 @@
         <activity android:name=".MyProfileActivity" />
         <activity android:name=".CameraActivity" />
 
+        <activity android:name=".SearchResult" />
+
         <activity android:name=".SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
