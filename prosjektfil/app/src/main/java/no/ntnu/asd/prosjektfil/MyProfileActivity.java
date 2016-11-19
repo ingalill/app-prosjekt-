@@ -24,7 +24,7 @@ import org.json.JSONObject;
 public class MyProfileActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
-    public static final String URL = "http://158.38.193.7:8080/RESTapiv3/webresources/userprofile";
+    public static final String URL = "http://158.38.140.171:8080/RESTapiv3/webresources/userprofile";
     private TextView TextFirstname;
     private TextView TextLastname;
     private TextView TextPhone;

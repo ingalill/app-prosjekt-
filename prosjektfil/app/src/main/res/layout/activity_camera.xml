@@ -15,20 +15,28 @@
         android:text="Take Photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="17dp"
+        android:layout_marginBottom="16dp"
         android:id="@+id/takePhotoBtn"
-        android:onClick="launchCamera" />
+        android:onClick="launchCamera"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="Save photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/takePhotoBtn"
+        android:layout_alignParentStart="true"
+        android:id="@+id/saveBtn" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@android:drawable/ic_menu_gallery"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
         android:id="@+id/photoView"
         android:minHeight="300dp"
-        android:minWidth="300dp" />
+        android:minWidth="300dp"
+        android:layout_marginTop="49dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

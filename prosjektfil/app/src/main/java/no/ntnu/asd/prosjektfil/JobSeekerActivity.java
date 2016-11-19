@@ -34,7 +34,7 @@ public class JobSeekerActivity extends AppCompatActivity {
     Uri imageUri;
     RequestQueue requestQueue;
     // husk å bytte ip adresse til din egen. //10.0.0.31 //158.38.193.12 // denne er feil link
-    public static final String URL = "http:/158.38.193.7:8080/RESTapiv3/webresources/userprofile";
+    public static final String URL = "http:/158.38.140.171:8080/RESTapiv3/webresources/userprofile";
     public static final String KEY_FIRSTNAME = "firstname";
     public static final String KEY_LASTNAME = "lastname";
     public static final String KEY_HOME = "home";
@@ -57,7 +57,7 @@ public class JobSeekerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_job_seeker);
         adapter = new UserAdapter(this, users);
 
-        profilePicture = (ImageView) findViewById(R.id.imageView);
+        profilePicture = (ImageView) findViewById(R.id.smallPreview);
         loadImageButton = (Button) findViewById(R.id.buttonProfilepicture);
         createUserButton = (Button) findViewById(R.id.buttonCreateUser);
         //input fields
@@ -85,9 +85,7 @@ public class JobSeekerActivity extends AppCompatActivity {
                     registerJobSeeker();
                 }
             }
-        }
-        );
-
+        });
 
     } // end of onCreate
 

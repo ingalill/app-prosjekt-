@@ -43,7 +43,7 @@ public class ListUserActivity extends AppCompatActivity {
     private List<User> users = new ArrayList<>();
     private User user;
     //158.38.193.12 // 10.0.0.31
-    public static final String URL = "http://158.38.193.7:8080/RESTapiv3/webresources/userprofile";
+    public static final String URL = "http://158.38.140.171:8080/RESTapiv3/webresources/userprofile";
     private RequestQueue requestQueue;
 
     @Override

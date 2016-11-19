@@ -28,6 +28,14 @@ public class CameraActivity extends AppCompatActivity {
         Button button = (Button) findViewById(R.id.takePhotoBtn);
         imageView = (ImageView) findViewById(R.id.photoView);
 
+        Button saveBtn = (Button) findViewById(R.id.saveBtn);
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CameraActivity.super.finish();
+            }
+        });
+
         //Disable the button if the user has no camera
         if(!hasCamera())
             button.setEnabled(false);
