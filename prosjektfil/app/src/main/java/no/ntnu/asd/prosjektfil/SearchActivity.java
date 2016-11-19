@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.support.v4.view.MenuItemCompat;
@@ -40,8 +41,9 @@ public class SearchActivity extends AppCompatActivity {
     private ListView searchResults;
     private UserAdapter searchAdapter;
     private ArrayAdapter adapter;
-    public static final String URL = "http://158.38.140.171:8080/RESTapiv3/webresources/userprofile/search/";
-
+    // public static final String URL = "http://158.38.140.171:8080/RESTapiv3/webresources/userprofile/search/";
+    private Resources res;
+    private String URL;
     private RequestQueue requestQueue;
 
     @Override
@@ -49,6 +51,9 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         getRequestQueue();
+
+        res = getResources();
+        URL = res.getString(R.string.serach_url);
 
         searchResults = (ListView) findViewById(R.id.searchResult);
         searchAdapter = new UserAdapter(this, new ArrayList<User>());

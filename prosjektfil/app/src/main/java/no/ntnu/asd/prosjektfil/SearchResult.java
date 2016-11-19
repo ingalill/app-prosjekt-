@@ -2,6 +2,7 @@ package no.ntnu.asd.prosjektfil;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
@@ -27,7 +28,9 @@ import java.util.List;
 public class SearchResult extends AppCompatActivity{
 
     private RequestQueue requestQueue;
-    public static final String URL = "http://158.38.140.171:8080/RESTapiv3/webresources/userprofile/";
+    //public static final String URL = "http://158.38.140.171:8080/RESTapiv3/webresources/userprofile/";
+    private Resources res;
+    private String URL;
     private TextView TextFirstname;
     private TextView TextLastname;
     private TextView TextPhone;
@@ -42,6 +45,9 @@ public class SearchResult extends AppCompatActivity{
         Intent intent = getIntent();
         final String intentFirstname = intent.getStringExtra("firstname");
         setTitle(intent.getStringExtra(intentFirstname));
+
+        res = getResources();
+        URL = res.getString(R.string.url);
 
         TextFirstname = (TextView) findViewById(R.id.textViewFornavn3);
         TextLastname = (TextView) findViewById(R.id.textViewEtternavn3);

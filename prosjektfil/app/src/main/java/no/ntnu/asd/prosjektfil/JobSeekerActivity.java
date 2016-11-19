@@ -1,6 +1,7 @@
 package no.ntnu.asd.prosjektfil;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -34,7 +35,12 @@ public class JobSeekerActivity extends AppCompatActivity {
     Uri imageUri;
     RequestQueue requestQueue;
     // husk å bytte ip adresse til din egen. //10.0.0.31 //158.38.193.12 // denne er feil link
-    public static final String URL = "http:/158.38.140.171:8080/RESTapiv3/webresources/userprofile";
+
+    private Resources res;
+    private String URL;
+
+
+    //public static final String URL = "http:/158.38.140.171:8080/RESTapiv3/webresources/userprofile";
     public static final String KEY_FIRSTNAME = "firstname";
     public static final String KEY_LASTNAME = "lastname";
     public static final String KEY_HOME = "home";
@@ -56,6 +62,9 @@ public class JobSeekerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_seeker);
         adapter = new UserAdapter(this, users);
+
+        res = getResources();
+        URL = res.getString(R.string.url);
 
         profilePicture = (ImageView) findViewById(R.id.smallPreview);
         loadImageButton = (Button) findViewById(R.id.buttonProfilepicture);

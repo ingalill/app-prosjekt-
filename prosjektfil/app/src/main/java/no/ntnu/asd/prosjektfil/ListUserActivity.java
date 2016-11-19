@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,7 +44,12 @@ public class ListUserActivity extends AppCompatActivity {
     private List<User> users = new ArrayList<>();
     private User user;
     //158.38.193.12 // 10.0.0.31
-    public static final String URL = "http://158.38.140.171:8080/RESTapiv3/webresources/userprofile";
+    //public static final String URL = "http://158.38.140.171:8080/RESTapiv3/webresources/userprofile";
+
+    private Resources res;
+    private String URL;
+
+
     private RequestQueue requestQueue;
 
     @Override
@@ -56,7 +62,8 @@ public class ListUserActivity extends AppCompatActivity {
         userAdapter = new UserAdapter(this, users);
         userList.setAdapter(userAdapter);
         setTitle("Jobb søkere");
-
+        res = getResources();
+        URL = res.getString(R.string.url);
         getRequestQueue();
         getUser();
 
@@ -79,7 +86,6 @@ public class ListUserActivity extends AppCompatActivity {
                                 user.setPhone(jsonResponse.getString("phone"));
 
                                 users.add(user);
-                                // System.out.println("Funker det: " + user.getFirstname());
                             }
                             userAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
@@ -104,7 +110,7 @@ public class ListUserActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class); // endring skal inn her
+                Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class);
 
                 String firstname = userAdapter.getItem(position).getFirstname();
                 intent.putExtra("firstname", firstname);

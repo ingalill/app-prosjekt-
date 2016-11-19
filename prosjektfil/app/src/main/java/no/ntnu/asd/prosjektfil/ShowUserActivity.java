@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
+ * IKKE I BRUK
  * Created by ingalill on 18/11/2016.
  */
 
@@ -33,6 +34,7 @@ public class ShowUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_user);
+
 
         TextFirstname = (TextView) findViewById(R.id.textViewFornavn3);
         TextLastname = (TextView) findViewById(R.id.textViewEtternavn3);

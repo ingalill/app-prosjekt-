@@ -1,6 +1,7 @@
 package no.ntnu.asd.prosjektfil;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -24,7 +25,9 @@ import org.json.JSONObject;
 public class MyProfileActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
-    public static final String URL = "http://158.38.140.171:8080/RESTapiv3/webresources/userprofile";
+   // public static final String URL = "http://158.38.140.171:8080/RESTapiv3/webresources/userprofile";
+   private Resources res;
+    private String URL;
     private TextView TextFirstname;
     private TextView TextLastname;
     private TextView TextPhone;
@@ -42,6 +45,8 @@ public class MyProfileActivity extends AppCompatActivity {
         TextInformation = (TextView) findViewById(R.id.cv);
         TextPhone = (TextView) findViewById(R.id.textViewMobNr3);
 
+        res = getResources();
+        URL = res.getString(R.string.url);
         getRequestQueue();
 
         Intent intent = getIntent();
