@@ -55,7 +55,7 @@ public class CameraActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap photo = (Bitmap) extras.get("data");
             User user = new User();
-            user.setPhoto(photo);
+            //user.setPhoto(photo);
 
             // Convert the Bitmap to byte array.
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -71,7 +71,7 @@ public class CameraActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     JobSeekerActivity jsa = new JobSeekerActivity();
-                    jsa.imagePreview();
+                    //jsa.imagePreview();
                     CameraActivity.super.finish();
                 }
             });

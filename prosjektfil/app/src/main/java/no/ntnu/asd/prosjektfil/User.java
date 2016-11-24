@@ -16,26 +16,16 @@ public class User implements Serializable {
     private String phone;
     private String home;
     private String information;
-    private Bitmap photo;
 
    public User(){
    }
 
-    public User(String firstname, String lastname,String home, String phone,String information,Bitmap photo){
+    public User(String firstname, String lastname,String home, String phone,String information){
         this.firstname = firstname;
         this.lastname = lastname;
         this.home = home;
         this.information = information;
         this.phone = phone;
-        this.photo = photo;
-    }
-
-    public Bitmap getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(Bitmap photo) {
-        this.photo = photo;
     }
 
     public String getFirstname() {
