@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.provider.SearchRecentSuggestions;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -17,18 +16,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +36,6 @@ public class SearchActivity extends AppCompatActivity {
     private ListView searchResults;
     private UserAdapter searchAdapter;
     private ArrayAdapter adapter;
-    // public static final String URL = "http://158.38.140.171:8080/RESTapiv3/webresources/userprofile/search/";
     private Resources res;
     private String URL;
     private RequestQueue requestQueue;
@@ -96,14 +90,13 @@ public class SearchActivity extends AppCompatActivity {
                                 JSONObject jsonResponse = response.getJSONObject(i);
                                 User user = new User();
                                 user.setFirstname(jsonResponse.getString("firstname"));
-                                if (user.getFirstname().compareTo(query) == 0) { // må endre user.getFirstname
+                                if (user.getFirstname().compareTo(query) == 0) {
                                     user.setFirstname(jsonResponse.getString("firstname"));
                                     user.setLastname(jsonResponse.getString("lastname"));
                                     user.setInformation(jsonResponse.getString("information"));
                                     user.setHome(jsonResponse.getString("home"));
                                     user.setPhone(jsonResponse.getString("phone"));
                                     result.add(user);
-                                    // System.out.println("KOMMER JEG HIT???? " + user);
                                 }
                             }
                         } catch (JSONException e) {
