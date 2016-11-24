@@ -36,7 +36,6 @@ public class SearchActivity extends AppCompatActivity {
     private ListView searchResults;
     private UserAdapter searchAdapter;
     private ArrayAdapter adapter;
-    // public static final String URL = "http://158.38.140.171:8080/RESTapiv3/webresources/userprofile/search/";
     private Resources res;
     private String URL;
     private RequestQueue requestQueue;

@@ -27,20 +27,14 @@ import java.util.ArrayList;
 
 public class JobSeekerActivity extends AppCompatActivity {
 
-     // code 400 --> dårlig respons for http:// lalal
-    // code 500 --> server error
-    ImageView profilePicture;
-    Button loadImageButton;
+    private ImageView profilePicture;
+    private Button loadImageButton;
     private static final int PICK_IMAGE = 100;
-    Uri imageUri;
-    RequestQueue requestQueue;
-    // husk å bytte ip adresse til din egen. //10.0.0.31 //158.38.193.12 // denne er feil link
-
+    private Uri imageUri;
+    private RequestQueue requestQueue;
     private Resources res;
     private String URL;
 
-
-    //public static final String URL = "http:/158.38.140.171:8080/RESTapiv3/webresources/userprofile";
     public static final String KEY_FIRSTNAME = "firstname";
     public static final String KEY_LASTNAME = "lastname";
     public static final String KEY_HOME = "home";
@@ -116,9 +110,7 @@ public class JobSeekerActivity extends AppCompatActivity {
             jsonObject.put(KEY_INFORMATION, information);
             // put password
             Log.d("test", jsonObject.toString());
-
             user = new User(firstname,lastname,home,phone,information);
-            //System.out.println(user);
 
         } catch (JSONException e) {
             e.printStackTrace();
