@@ -67,4 +67,15 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="26dp"
         android:id="@+id/textViewSignUp" />
+
+    <TextView
+        android:text="Arbeidssøker"
+        android:textColor="@android:color/background_light"
+        android:textSize="50sp"
+        android:textStyle="italic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView4" />
 </RelativeLayout>
