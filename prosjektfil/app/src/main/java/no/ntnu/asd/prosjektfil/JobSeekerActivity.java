@@ -2,6 +2,7 @@ package no.ntnu.asd.prosjektfil;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -25,12 +26,14 @@ import java.util.ArrayList;
 public class JobSeekerActivity extends AppCompatActivity {
 
     private ImageView profilePicture;
-    private Button loadImageButton;
+    private Button cameraButton;
     private static final int PICK_IMAGE = 100;
-    private Uri imageUri;
+    //private Uri imageUri;
     private RequestQueue requestQueue;
     private Resources res;
     private String URL;
+    private Button galleryButton;
+
 
     public static final String KEY_FIRSTNAME = "firstname";
     public static final String KEY_LASTNAME = "lastname";
@@ -58,7 +61,7 @@ public class JobSeekerActivity extends AppCompatActivity {
         URL = res.getString(R.string.url);
 
         profilePicture = (ImageView) findViewById(R.id.smallPreview);
-        loadImageButton = (Button) findViewById(R.id.buttonProfilepicture);
+        cameraButton = (Button) findViewById(R.id.buttonProfilepicture);
         createUserButton = (Button) findViewById(R.id.buttonCreateUser);
         //input fields
         EditTextFirstname = (EditText) findViewById(R.id.firstname);
@@ -66,15 +69,22 @@ public class JobSeekerActivity extends AppCompatActivity {
         EditTextHome = (EditText) findViewById(R.id.address);
         EditTextPhone = (EditText) findViewById(R.id.phone);
         EditTextInformation = (EditText) findViewById(R.id.information);
+        galleryButton = (Button) findViewById(R.id.buttonGallery);
         getRequestQueue();
 
-        loadImageButton.setOnClickListener(new View.OnClickListener() {
+
+        galleryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Her må galleri og kamerafunksjonen samkjøres på et vis
-                //openGallery();
-                Intent intent = new Intent(JobSeekerActivity.this, CameraActivity.class);
-                startActivity(intent);
+                openGallery2();
+            }
+        });
+
+
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startCamera();;
             }
         });
 
@@ -111,7 +121,7 @@ public class JobSeekerActivity extends AppCompatActivity {
             jsonObject.put(KEY_INFORMATION, information);
             // put password
             Log.d("test", jsonObject.toString());
-            user = new User(firstname,lastname,home,phone,information);
+            user = new User(firstname, lastname, home, phone, information);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -125,12 +135,12 @@ public class JobSeekerActivity extends AppCompatActivity {
 
                     }
                 }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("test", "Error test i blir gal", error);
-                        Toast.makeText(JobSeekerActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-                    }
-            });
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("test", "Error test i blir gal", error);
+                Toast.makeText(JobSeekerActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
 
         requestQueue.add(jsonObjectRequest);
         adapter.add(user);
@@ -157,13 +167,44 @@ public class JobSeekerActivity extends AppCompatActivity {
         startActivityForResult(gallery, PICK_IMAGE);
     }
 
+
+    private void startCamera(){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 0);
+    }
+
+
+    private void openGallery2() {
+        Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(pickPhoto, 1);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+       /* if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageUri = data.getData();
             profilePicture.setImageURI(imageUri);
+        }*/
+        switch (requestCode) {
+            case 0:
+                if (resultCode == RESULT_OK) {
+                    Uri imageUri = data.getData();
+                    profilePicture.setImageURI(imageUri);
+                }
+                break;
+
+            case 1:
+                if(resultCode == RESULT_OK){
+                    Uri imageUri = data.getData();
+                    profilePicture.setImageURI(imageUri);
+                }
+                break;
         }
+                /*Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                profilePicture.setImageBitmap(bitmap);*/
+        }
+
     }
 
-}

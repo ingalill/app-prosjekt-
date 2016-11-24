@@ -91,18 +91,6 @@
         android:layout_alignEnd="@+id/phone"
         android:id="@+id/address" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Last opp profilbilde"
-        android:textSize="10sp"
-        android:ems="10"
-        android:id="@+id/buttonProfilepicture"
-        android:layout_above="@+id/lastname"
-        android:layout_alignParentEnd="true" />
-
-
 
     <TextView
         android:text="Skriv litt om deg selv:"
@@ -133,14 +121,46 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textSize="10sp"
+        android:ems="10"
+        android:id="@+id/buttonProfilepicture"
+        android:background="@android:drawable/ic_menu_camera"
+        android:layout_alignBaseline="@+id/buttonGallery"
+        android:layout_alignBottom="@+id/buttonGallery"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text=""
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/buttonGallery"
+        android:background="@android:drawable/ic_menu_gallery"
+        android:layout_alignTop="@+id/textViewEtternavn"
+        android:layout_toEndOf="@+id/buttonCreateUser" />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/ic_launcher"
         android:id="@+id/smallPreview"
-        android:layout_marginStart="15dp"
-        android:layout_above="@+id/buttonProfilepicture"
-        android:layout_toEndOf="@+id/buttonCreateUser" />
+        android:layout_marginStart="26dp"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="10dp"
+        android:layout_alignBottom="@+id/firstname"
+        android:layout_alignStart="@+id/buttonGallery" />
+
+    <TextView
+        android:text="Profilbilde"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/smallPreview" />
 
 
 </RelativeLayout>
