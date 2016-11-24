@@ -2,6 +2,7 @@ package no.ntnu.asd.prosjektfil;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -98,6 +99,11 @@ public class JobSeekerActivity extends AppCompatActivity {
 
     } // end of onCreate
 
+    public void imagePreview(){
+        Bitmap photo = user.getPhoto();
+        profilePicture.setImageBitmap(photo);
+    }
+
     private void registerJobSeeker() {
         final String firstname = EditTextFirstname.getText().toString().trim();
         final String lastname = EditTextLastname.getText().toString().trim();
@@ -117,7 +123,7 @@ public class JobSeekerActivity extends AppCompatActivity {
             // put password
             Log.d("test", jsonObject.toString());
 
-            user = new User(firstname,lastname,home,phone,information);
+            user = new User(firstname,lastname,home,phone,information,user.getPhoto());
             //System.out.println(user);
 
         } catch (JSONException e) {

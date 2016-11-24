@@ -18,7 +18,7 @@ public class CameraActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     ImageView imageView;
-    byte[] b;
+    //private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +28,7 @@ public class CameraActivity extends AppCompatActivity {
         Button button = (Button) findViewById(R.id.takePhotoBtn);
         imageView = (ImageView) findViewById(R.id.photoView);
 
-        Button saveBtn = (Button) findViewById(R.id.saveBtn);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CameraActivity.super.finish();
-            }
-        });
+
 
         //Disable the button if the user has no camera
         if(!hasCamera())
@@ -60,20 +54,27 @@ public class CameraActivity extends AppCompatActivity {
             //Get the photo
             Bundle extras = data.getExtras();
             Bitmap photo = (Bitmap) extras.get("data");
-            //imageView.setImageBitmap(photo);
+            User user = new User();
+            user.setPhoto(photo);
 
             // Convert the Bitmap to byte array.
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             photo.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            b = baos.toByteArray();
+            byte[] b = baos.toByteArray();
 
             // Convert byte array to Bitmap
             Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
             imageView.setImageBitmap(bitmap);
-        }
-    }
 
-    public byte[] getB() {
-        return b;
+            Button saveBtn = (Button) findViewById(R.id.saveBtn);
+            saveBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    JobSeekerActivity jsa = new JobSeekerActivity();
+                    jsa.imagePreview();
+                    CameraActivity.super.finish();
+                }
+            });
+        }
     }
 }
