@@ -12,15 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
@@ -92,6 +89,9 @@ public class JobSeekerActivity extends AppCompatActivity {
 
     } // end of onCreate
 
+    /**
+     * Register a joobseker and save the information to the database.
+     */
     private void registerJobSeeker() {
         final String firstname = EditTextFirstname.getText().toString().trim();
         final String lastname = EditTextLastname.getText().toString().trim();
@@ -103,6 +103,7 @@ public class JobSeekerActivity extends AppCompatActivity {
         try {
             View.generateViewId(); // tror ikke denne trengst
 
+            // maps the input from the user to the database key. 
             jsonObject.put(KEY_FIRSTNAME, firstname);
             jsonObject.put(KEY_LASTNAME, lastname);
             jsonObject.put(KEY_HOME, home);
