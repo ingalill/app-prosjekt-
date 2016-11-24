@@ -8,11 +8,13 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
+    android:background="@color/colorPrimary"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="no.ntnu.asd.prosjektfil.MyProfileActivity">
 
     <TextView
         android:text="Mobilnummer:"
+        android:textColor="@android:color/background_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -22,6 +24,7 @@
 
     <TextView
         android:text="Fornavn:"
+        android:textColor="@android:color/background_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewFornavn"
@@ -33,6 +36,7 @@
         android:text="Bosted:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/background_light"
         android:id="@+id/textViewAdress"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/textViewMobNr"
@@ -40,6 +44,7 @@
 
     <TextView
         android:text="Etternavn:"
+        android:textColor="@android:color/background_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -49,52 +54,58 @@
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:inputType="textPersonName"
         android:text=""
         android:hint="....."
         android:ems="10"
+
         android:layout_below="@+id/textViewFornavn"
         android:layout_alignParentStart="true"
-        android:id="@+id/firstname" />
+        android:id="@+id/firstname"
+        android:background="@android:color/background_light" />
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:inputType="textPersonName"
         android:text=""
         android:hint="....."
         android:ems="10"
         android:layout_below="@+id/textViewEtternavn"
         android:layout_alignParentStart="true"
+        android:background="@android:color/background_light"
         android:id="@+id/lastname" />
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:inputType="textPersonName"
         android:text=""
         android:hint="....."
         android:ems="10"
         android:layout_below="@+id/textViewMobNr"
         android:layout_alignParentStart="true"
+        android:background="@android:color/background_light"
         android:id="@+id/phone" />
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:inputType="textPersonName"
         android:text=""
         android:hint="..."
         android:ems="10"
         android:layout_below="@+id/textViewAdress"
         android:layout_alignEnd="@+id/phone"
+        android:background="@android:color/background_light"
         android:id="@+id/address" />
 
 
     <TextView
         android:text="Skriv litt om deg selv:"
         android:layout_width="wrap_content"
+        android:textColor="@android:color/background_light"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewAdress"
         android:layout_marginTop="50dp"
@@ -110,16 +121,8 @@
         android:layout_below="@+id/textView3"
         android:layout_alignParentStart="true"
         android:id="@+id/information"
+        android:background="@android:color/background_light"
         android:layout_alignParentEnd="true" />
-
-    <Button
-        android:text="Opprett Bruker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:id="@+id/buttonCreateUser"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="50dp"
@@ -156,11 +159,22 @@
 
     <TextView
         android:text="Profilbilde"
+        android:textColor="@android:color/background_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView2"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/smallPreview" />
+
+    <Button
+        android:text="Opprett Bruker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:id="@+id/buttonCreateUser"
+        android:background="@android:color/darker_gray"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
