@@ -3,6 +3,7 @@ package no.ntnu.asd.prosjektfil;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class JobSeekerActivity extends AppCompatActivity {
@@ -34,6 +37,7 @@ public class JobSeekerActivity extends AppCompatActivity {
     private String URL;
     private Button galleryButton;
 
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     public static final String KEY_FIRSTNAME = "firstname";
     public static final String KEY_LASTNAME = "lastname";
@@ -169,15 +173,16 @@ public class JobSeekerActivity extends AppCompatActivity {
 
 
     private void startCamera(){
+        //startActivity(new Intent(JobSeekerActivity.this, CameraActivity.class));
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, 0);
+        startActivityForResult(intent, 1);
     }
 
 
     private void openGallery2() {
         Intent pickPhoto = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(pickPhoto, 1);
+        startActivityForResult(pickPhoto, 0);
     }
 
     @Override
@@ -196,9 +201,21 @@ public class JobSeekerActivity extends AppCompatActivity {
                 break;
 
             case 1:
-                if(resultCode == RESULT_OK){
-                    Uri imageUri = data.getData();
-                    profilePicture.setImageURI(imageUri);
+                if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+                    //Get the photo
+                    Bundle extras = data.getExtras();
+                    Bitmap photo = (Bitmap) extras.get("data");
+                    User user = new User();
+                    //user.setPhoto(photo);
+
+                    // Convert the Bitmap to byte array.
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    photo.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] b = baos.toByteArray();
+
+                    // Convert byte array to Bitmap
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
+                    profilePicture.setImageBitmap(bitmap);
                 }
                 break;
         }
