@@ -31,8 +31,6 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class UserprofileFacadeREST extends AbstractFacade<Userprofile> {
 
-    // @Resource(mappedName="jdbc/Profile")
-    //DataSource dataSource;
     @PersistenceContext(unitName = "asd.ntnu.no_RESTapiv3_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -44,7 +42,6 @@ public class UserprofileFacadeREST extends AbstractFacade<Userprofile> {
     @Override
     @Consumes({MediaType.APPLICATION_JSON})
     public void create(Userprofile entity) {
-        //    System.out.println("Hello from create " + entity);
         super.create(entity);
     }
 

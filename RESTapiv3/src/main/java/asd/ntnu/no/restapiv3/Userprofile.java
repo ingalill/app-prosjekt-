@@ -6,6 +6,9 @@
 package asd.ntnu.no.restapiv3;
 
 import java.io.Serializable;
+import java.sql.Blob;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,6 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Userprofile.findByLastname", query = "SELECT u FROM Userprofile u WHERE u.lastname = :lastname")
     , @NamedQuery(name = "Userprofile.findByHome", query = "SELECT u FROM Userprofile u WHERE u.home = :home")
     , @NamedQuery(name = "Userprofile.findByInformation", query = "SELECT u FROM Userprofile u WHERE u.information = :information")
+    , @NamedQuery(name = "UserProfile.findByPhoto", query = "SELECT u FROM Userprofile u WHERE u.photo =:photo")
     , @NamedQuery(name = "Userprofile.findByPhone", query = "SELECT u FROM Userprofile u WHERE u.phone = :phone")})
 public class Userprofile implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -51,10 +55,15 @@ public class Userprofile implements Serializable {
 
     @Size(max = 100)
     private String information;
-    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    
     @Size(max = 10)
     private String phone;
-
+    
+    @Size(max =10000)
+    private Blob photo;
+            
+    ResultSet rs;
+    
     public Userprofile() {
     }
 
@@ -62,6 +71,17 @@ public class Userprofile implements Serializable {
         this.id = id;
     }
 
+    private void setPhoto(Blob newPhoto){
+        this.photo = newPhoto;
+    }
+    
+    private byte[] getPhoto() throws SQLException{
+        
+        byte[] bytes = rs.getBytes("photo");
+        //return photo;
+        return bytes;
+    }
+    
     public Long getId() {
         return id;
     }

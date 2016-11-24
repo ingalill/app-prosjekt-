@@ -12,5 +12,8 @@
  android:searchSuggestAuthority="no.ntnu.asd.prosjektfil.SuggestionProvider"
     android:searchSuggestIntentAction="android.intent.action.VIEW"
     android:searchSuggestSelection=" ?"
+    android:searchSuggestIntentData="content://no.ntnu.asd.prosjektfil.app.ContentProvider/UserProfile"
+    android:searchSuggestAuthority="no.ntnu.asd.prosjektfil.app.ContentProvider"
+    android:searchSuggestPath="UserProfile"
 
 -->
