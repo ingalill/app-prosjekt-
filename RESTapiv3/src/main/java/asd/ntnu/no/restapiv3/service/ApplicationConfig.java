@@ -7,6 +7,7 @@ package asd.ntnu.no.restapiv3.service;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 
 /**
  *
@@ -18,6 +19,7 @@ public class ApplicationConfig extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
+        resources.add(MultiPartFeature.class);
         addRestResourceClasses(resources);
         return resources;
     }
@@ -30,6 +32,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(asd.ntnu.no.restapiv3.service.EmployerFacadeREST.class);
+        resources.add(asd.ntnu.no.restapiv3.service.PictureService.class);
         resources.add(asd.ntnu.no.restapiv3.service.UserprofileFacadeREST.class);
     }
     

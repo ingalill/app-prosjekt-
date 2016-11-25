@@ -5,8 +5,18 @@
  */
 package asd.ntnu.no.restapiv3.service;
 
+import asd.ntnu.no.restapiv3.Picture;
 import asd.ntnu.no.restapiv3.Userprofile;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,6 +31,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
 /**
  * @version 03.11.2014
@@ -103,5 +116,5 @@ public class UserprofileFacadeREST extends AbstractFacade<Userprofile> {
     protected EntityManager getEntityManager() {
         return em;
     }
-
+    
 }

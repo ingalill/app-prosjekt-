@@ -146,6 +146,7 @@ public class JobSeekerActivity extends AppCompatActivity {
             }
         });
 
+
         requestQueue.add(jsonObjectRequest);
         adapter.add(user);
         Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class);
@@ -221,7 +222,7 @@ public class JobSeekerActivity extends AppCompatActivity {
         }
                 /*Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 profilePicture.setImageBitmap(bitmap);*/
-        }
-
     }
+
+}
 
