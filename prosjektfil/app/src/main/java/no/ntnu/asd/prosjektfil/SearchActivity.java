@@ -119,12 +119,6 @@ public class SearchActivity extends AppCompatActivity {
         searchAdapter.notifyDataSetChanged();
     }
 
-    /**
-     * If there is no requestQueue then its create a new reqeustQueue
-     *
-     * @return requestQueue
-     */
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

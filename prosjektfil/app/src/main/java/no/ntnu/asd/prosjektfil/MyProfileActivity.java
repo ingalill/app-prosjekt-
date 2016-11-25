@@ -89,5 +89,4 @@ public class MyProfileActivity extends AppCompatActivity {
     }
 
 
-
 } // end of class

@@ -88,10 +88,7 @@ public class SearchResult extends AppCompatActivity{
         }
         );
         MySingleton.getInstance(SearchResult.this).addToRequestQueue(jsonArrayRequest);
-
     }
-
-
 
 
 } // end of class
