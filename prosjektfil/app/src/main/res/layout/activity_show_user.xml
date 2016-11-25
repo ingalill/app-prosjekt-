@@ -5,6 +5,7 @@
     android:id="@+id/activity_my_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -23,6 +24,7 @@
 
     <TextView
         android:text="Fornavn: "
+        android:textColor="@android:color/white"
         android:textStyle="bold"
         android:textSize="15sp"
         android:layout_width="wrap_content"
@@ -35,8 +37,9 @@
     <TextView
         android:text=""
         android:hint="Ditt navn..."
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:background="@drawable/textbox_style"
+        android:layout_width="165dp"
+        android:layout_height="35dp"
         android:layout_below="@+id/textViewFornavn2"
         android:layout_alignParentStart="true"
         android:id="@+id/textViewFornavn3" />
@@ -44,6 +47,7 @@
     <TextView
         android:text="Etternavn:"
         android:textStyle="bold"
+        android:textColor="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewFornavn3"
@@ -54,13 +58,15 @@
     <TextView
         android:text=""
         android:hint="Ditt etternavn..."
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="165dp"
+        android:layout_height="35dp"
+        android:background="@drawable/textbox_style"
         android:layout_below="@+id/textViewEtternavn2"
         android:id="@+id/textViewEtternavn3" />
 
     <TextView
         android:text="Mobionummer:"
+        android:textColor="@android:color/white"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,8 +78,9 @@
     <TextView
         android:text=""
         android:hint="Ditt mobilnummer..."
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:background="@drawable/textbox_style"
+        android:layout_width="165dp"
+        android:layout_height="35dp"
         android:layout_alignBottom="@+id/textViewFornavn3"
         android:layout_alignStart="@+id/textViewMobNr2"
         android:id="@+id/textViewMobNr3" />
@@ -81,6 +88,7 @@
     <TextView
         android:text="Adresse"
         android:textStyle="bold"
+        android:textColor="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textViewEtternavn3"
@@ -90,9 +98,10 @@
     <TextView
         android:text=""
         android:hint="Din adresse..."
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="165dp"
+        android:layout_height="35dp"
         android:layout_below="@+id/textViewAdress2"
+        android:background="@drawable/textbox_style"
         android:layout_alignStart="@+id/textViewAdress2"
         android:id="@+id/textViewAdress3" />
 
@@ -104,12 +113,14 @@
         android:layout_below="@+id/textViewCV2"
         android:layout_marginTop="10dp"
         android:id="@+id/cv"
+        android:background="@drawable/textbox_style"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true" />
 
     <TextView
         android:text="Om deg:"
         android:textStyle="bold"
+        android:textColor="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"

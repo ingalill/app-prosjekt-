@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/border_style"
     android:layout_height="match_parent">
 
     <ImageView
@@ -12,6 +13,7 @@
 
     <TextView
         android:text="Home"
+        android:textColor="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvHome"
@@ -23,6 +25,7 @@
 
     <TextView
         android:text="First and last name"
+        android:textColor="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/userInfo"
@@ -35,6 +38,7 @@
         android:text="Qualification"
         android:layout_height="wrap_content"
         android:id="@+id/qualification"
+        android:textColor="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/userImage"
@@ -43,6 +47,7 @@
     <TextView
         android:text="Information preview"
         android:layout_width="match_parent"
+        android:textColor="@android:color/white"
         android:layout_height="wrap_content"
         android:layout_below="@+id/userInfo"
         android:layout_toEndOf="@+id/userImage"
@@ -55,7 +60,8 @@
         android:layout_height="wrap_content"
         android:text="mobil numer"
         android:id="@+id/phone"
-        android:layout_below="@+id/userImage"
-        android:layout_toEndOf="@+id/userImage" />
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/userInfo"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
