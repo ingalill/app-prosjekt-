@@ -24,7 +24,6 @@ import org.json.JSONObject;
  */
 public class MyProfileActivity extends AppCompatActivity {
 
-    private RequestQueue requestQueue;
     private Resources res;
     private String URL;
     private TextView TextFirstname;
@@ -46,7 +45,6 @@ public class MyProfileActivity extends AppCompatActivity {
 
         res = getResources();
         URL = res.getString(R.string.url);
-        getRequestQueue();
 
         Intent intent = getIntent();
         final String intentFirstname = intent.getStringExtra("firstname");
@@ -87,19 +85,9 @@ public class MyProfileActivity extends AppCompatActivity {
             }
         }
         );
-        requestQueue.add(jsonArrayRequest);
+        MySingleton.getInstance(MyProfileActivity.this).addToRequestQueue(jsonArrayRequest);
     }
 
-    /**
-     * If there is no requestQueue then its create a new reqeustQueue
-     *
-     * @return requestQueue
-     */
-    public RequestQueue getRequestQueue() {
-        if (requestQueue == null) {
-            requestQueue = Volley.newRequestQueue(getApplicationContext());
-        }
-        return requestQueue;
-    }
+
 
 } // end of class

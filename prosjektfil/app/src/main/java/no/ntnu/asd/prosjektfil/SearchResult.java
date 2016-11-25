@@ -27,7 +27,6 @@ import java.util.List;
 
 public class SearchResult extends AppCompatActivity{
 
-    private RequestQueue requestQueue;
     private Resources res;
     private String URL;
     private TextView TextFirstname;
@@ -53,8 +52,6 @@ public class SearchResult extends AppCompatActivity{
         TextHome = (TextView) findViewById(R.id.textViewAdress3);
         TextInformation = (TextView) findViewById(R.id.cv);
         TextPhone = (TextView) findViewById(R.id.textViewMobNr3);
-
-        getRequestQueue();
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL,
                 new Response.Listener<JSONArray>() {
@@ -90,20 +87,11 @@ public class SearchResult extends AppCompatActivity{
             }
         }
         );
-        requestQueue.add(jsonArrayRequest);
+        MySingleton.getInstance(SearchResult.this).addToRequestQueue(jsonArrayRequest);
+
     }
 
-    /**
-     * If there is no requestQueue then its create a new reqeustQueue
-     *
-     * @return requestQueue
-     */
-    public RequestQueue getRequestQueue() {
-        if (requestQueue == null) {
-            requestQueue = Volley.newRequestQueue(getApplicationContext());
-        }
-        return requestQueue;
-    }
+
 
 
 } // end of class

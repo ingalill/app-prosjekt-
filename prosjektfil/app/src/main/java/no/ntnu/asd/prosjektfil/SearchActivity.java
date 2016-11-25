@@ -35,16 +35,13 @@ public class SearchActivity extends AppCompatActivity {
 
     private ListView searchResults;
     private UserAdapter searchAdapter;
-    private ArrayAdapter adapter;
     private Resources res;
     private String URL;
-    private RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        getRequestQueue();
 
         res = getResources();
         URL = res.getString(R.string.serach_url);
@@ -113,8 +110,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         }
         );
-
-        requestQueue.add(jsonArrayRequest);
+        MySingleton.getInstance(SearchActivity.this).addToRequestQueue(jsonArrayRequest);
     }
 
     // present the results.
@@ -128,12 +124,7 @@ public class SearchActivity extends AppCompatActivity {
      *
      * @return requestQueue
      */
-    public RequestQueue getRequestQueue() {
-        if (requestQueue == null) {
-            requestQueue = Volley.newRequestQueue(getApplicationContext());
-        }
-        return requestQueue;
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

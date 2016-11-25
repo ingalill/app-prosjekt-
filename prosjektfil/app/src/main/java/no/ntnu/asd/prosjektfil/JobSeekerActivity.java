@@ -31,8 +31,6 @@ public class JobSeekerActivity extends AppCompatActivity {
     private ImageView profilePicture;
     private Button cameraButton;
     private static final int PICK_IMAGE = 100;
-    //private Uri imageUri;
-    private RequestQueue requestQueue;
     private Resources res;
     private String URL;
     private Button galleryButton;
@@ -74,7 +72,6 @@ public class JobSeekerActivity extends AppCompatActivity {
         EditTextPhone = (EditText) findViewById(R.id.phone);
         EditTextInformation = (EditText) findViewById(R.id.information);
         galleryButton = (Button) findViewById(R.id.buttonGallery);
-        getRequestQueue();
 
 
         galleryButton.setOnClickListener(new View.OnClickListener() {
@@ -142,30 +139,17 @@ public class JobSeekerActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("test", "Error test i blir gal", error);
-                Toast.makeText(JobSeekerActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+               // Toast.makeText(JobSeekerActivity.this, error.toString(), Toast.LENGTH_LONG).show();
             }
         });
 
-
-        requestQueue.add(jsonObjectRequest);
+        MySingleton.getInstance(JobSeekerActivity.this).addToRequestQueue(jsonObjectRequest);
         adapter.add(user);
         Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class);
         intent.putExtra("firstname", firstname);
         startActivity(intent);
     }
 
-
-    /**
-     * If there is no requestQueue then its create a new reqeustQueue
-     *
-     * @return requestQueue
-     */
-    public RequestQueue getRequestQueue() {
-        if (requestQueue == null) {
-            requestQueue = Volley.newRequestQueue(getApplicationContext());
-        }
-        return requestQueue;
-    }
 
     private void openGallery() {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);

@@ -45,7 +45,6 @@ public class ListUserActivity extends AppCompatActivity {
     private User user;
     private Resources res;
     private String URL;
-    private RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +58,14 @@ public class ListUserActivity extends AppCompatActivity {
         setTitle("Jobb søkere");
         res = getResources();
         URL = res.getString(R.string.url);
-        getRequestQueue();
         getUser();
 
     } // end of on create
 
+    /**
+     * Get users from the database using a volley request.
+     * Call the clickListner at the end of the method to start a new activity.
+     */
     public void getUser() {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL,
                 new Response.Listener<JSONArray>() {
@@ -93,12 +95,13 @@ public class ListUserActivity extends AppCompatActivity {
             }
         }
         );
-        requestQueue.add(jsonArrayRequest);
+        MySingleton.getInstance(ListUserActivity.this).addToRequestQueue(jsonArrayRequest);
         listViewClicker();
     }
 
     /**
-     *
+     * Start the activity MyProfileActivity,
+     * send with an intent with the firstname of the jobseeker.
      */
     public void listViewClicker() {
         userList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -106,7 +109,6 @@ public class ListUserActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class);
-
                 String firstname = userAdapter.getItem(position).getFirstname();
                 intent.putExtra("firstname", firstname);
                 startActivity(intent);
@@ -116,17 +118,11 @@ public class ListUserActivity extends AppCompatActivity {
     }
 
     /**
-     * If there is no requestQueue then its create a new reqeustQueue
-     *
-     * @return requestQueue
+     * To spescify the optins menu for an activity
+     * Menu layout has a search item.
+     * @param menu
+     * @return
      */
-    public RequestQueue getRequestQueue() {
-        if (requestQueue == null) {
-            requestQueue = Volley.newRequestQueue(getApplicationContext());
-        }
-        return requestQueue;
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -141,6 +137,11 @@ public class ListUserActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * React to the user tapping/selecting an options menu item.
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
