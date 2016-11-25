@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:background="@drawable/border_style"
+   android:background="@drawable/border_style"
+
     android:layout_height="match_parent">
 
     <ImageView
@@ -11,57 +12,53 @@
         app:srcCompat="@mipmap/ic_launcher"
         android:id="@+id/userImage" />
 
+
     <TextView
         android:text="Home"
         android:textColor="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:id="@+id/tvHome"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
         android:paddingTop="5dp"
         android:paddingRight="5dp"
-        android:paddingLeft="5dp" />
+        android:paddingLeft="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/phone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mobilnr"
+        android:id="@+id/phone"
+        android:textColor="@android:color/white"
+        android:layout_marginEnd="30dp"
+        android:layout_below="@+id/userInfo"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="17dp" />
+
+    <TextView
+        android:text="Information preview"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:textColor="@android:color/white"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvInfo"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:layout_alignBottom="@+id/phone"
+        android:layout_toEndOf="@+id/userImage" />
 
     <TextView
         android:text="First and last name"
         android:textColor="@android:color/white"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/userInfo"
-        android:layout_below="@+id/tvHome"
-        android:layout_toEndOf="@+id/userImage"
         android:paddingBottom="6dp"
-        android:paddingTop="6dp" />
-
-    <TextView
-        android:text="Qualification"
-        android:layout_height="wrap_content"
-        android:id="@+id/qualification"
-        android:textColor="@android:color/white"
-        android:layout_width="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/userImage"
-        android:paddingTop="5dp" />
-
-    <TextView
-        android:text="Information preview"
-        android:layout_width="match_parent"
-        android:textColor="@android:color/white"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/userInfo"
-        android:layout_toEndOf="@+id/userImage"
-        android:id="@+id/tvInfo"
+        android:layout_marginLeft="10dp"
         android:paddingTop="6dp"
-        android:paddingBottom="6dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="mobil numer"
-        android:id="@+id/phone"
-        android:textColor="@android:color/white"
-        android:layout_below="@+id/userInfo"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/userImage" />
 
 </RelativeLayout>
