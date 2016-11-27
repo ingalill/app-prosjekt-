@@ -9,6 +9,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * The login part is not done yet, is for the improvment part of the code.
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private Button signInButton;

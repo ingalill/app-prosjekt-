@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * An abstract class to that take T as an parameter, in this way we can use this class
+ * for all our subclasses without defining T to be a UserProfile, in this way if we want
+ * to add more users they all can use this abstract class. The class is generic. 
  */
 package asd.ntnu.no.restapiv3.service;
 
@@ -36,15 +36,6 @@ public abstract class AbstractFacade<T> {
 
     public T find(Object id) {
         return getEntityManager().find(entityClass, id);
-    }
-    
-    /*
-    Blir ikke brukt
-    */
-    public List<T> findByName(Object name){
-        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        cq.select(cq.from(entityClass));
-        return getEntityManager().createQuery(cq).getResultList();
     }
     
     public List<T> findAll() {

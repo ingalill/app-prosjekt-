@@ -52,7 +52,7 @@ public class SearchActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
+            String query = intent.getStringExtra(SearchManager.QUERY); // suggestion is disabled.
             // SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this, SuggestionProvider.AUTHORITY, SuggestionProvider.MODE);
             //suggestions.saveRecentQuery(query, null);
             doSearch(query);
@@ -62,7 +62,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //får tak i navnet til kontakten man har valgt
+                //Get the name of the contact we choosed.
                 String firstname = searchAdapter.getItem(position).getFirstname();
                 Intent i = new Intent(getApplicationContext(), SearchResult.class);
                 i.putExtra("firstname", firstname);
@@ -73,6 +73,7 @@ public class SearchActivity extends AppCompatActivity {
 
     /*
      * Search for a jobseeker.
+     * Adds the jsonArrayRequest to RequestQueue.
      */
     private void doSearch(final String query) {
 
@@ -113,7 +114,10 @@ public class SearchActivity extends AppCompatActivity {
         MySingleton.getInstance(SearchActivity.this).addToRequestQueue(jsonArrayRequest);
     }
 
-    // present the results.
+    /**
+     * Present the result and adding them to the searchAdapter
+     * @param results, list with user to add.
+     */
     private void doPresentResult(List<User> results) {
         searchAdapter.addAll(results);
         searchAdapter.notifyDataSetChanged();

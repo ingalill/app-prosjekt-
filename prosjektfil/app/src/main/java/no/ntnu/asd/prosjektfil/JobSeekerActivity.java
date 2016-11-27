@@ -37,6 +37,7 @@ public class JobSeekerActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
+    // the database variable names.
     public static final String KEY_FIRSTNAME = "firstname";
     public static final String KEY_LASTNAME = "lastname";
     public static final String KEY_HOME = "home";
@@ -80,8 +81,6 @@ public class JobSeekerActivity extends AppCompatActivity {
                 openGallery2();
             }
         });
-
-
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,14 +119,15 @@ public class JobSeekerActivity extends AppCompatActivity {
             jsonObject.put(KEY_HOME, home);
             jsonObject.put(KEY_PHONE, phone);
             jsonObject.put(KEY_INFORMATION, information);
-            // put password
-            Log.d("test", jsonObject.toString());
+
+           // Log.d("test", jsonObject.toString());
             user = new User(firstname, lastname, home, phone, information);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+        // send the jsonObject with the jsonObjectRequest.
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -138,8 +138,8 @@ public class JobSeekerActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("test", "Error test i blir gal", error);
-               // Toast.makeText(JobSeekerActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                Log.d("test", "Error", error);
+
             }
         });
 

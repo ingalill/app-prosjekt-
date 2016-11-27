@@ -21,6 +21,10 @@ public class MySingleton {
         requestQueue = getRequestQueue();
     }
 
+    /**
+     * If requestQueue is null, then create a new requestQueue
+     * @return requestQueue
+     */
     public RequestQueue getRequestQueue(){
         if(requestQueue == null){
             requestQueue = Volley.newRequestQueue(context.getApplicationContext());
@@ -28,6 +32,11 @@ public class MySingleton {
         return requestQueue;
     }
 
+    /**
+     * Gets the instance of MySingleton
+     * @param context
+     * @return mInstance of MySingleton.
+     */
     public static synchronized MySingleton getInstance(Context context){
         if(mInstance == null){
             mInstance = new MySingleton(context);
@@ -35,6 +44,11 @@ public class MySingleton {
         return mInstance;
     }
 
+    /**
+     * Add elements to the requestQueue
+     * @param request
+     * @param <T>
+     */
     public<T> void addToRequestQueue(Request<T> request){
         requestQueue.add(request);
     }

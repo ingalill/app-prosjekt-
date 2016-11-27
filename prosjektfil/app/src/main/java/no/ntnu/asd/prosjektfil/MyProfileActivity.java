@@ -18,8 +18,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Om vi får tid til å fikse innlogging skal linje 50 om JSONObject jsonResponse bli endret.
- * <p>
  * Created by Inga
  */
 public class MyProfileActivity extends AppCompatActivity {
@@ -55,9 +53,10 @@ public class MyProfileActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
 
+                        // try to get the information about the jobseeker and show it in the text fields.
                         try {
                             for (int i = 0; i < response.length(); i++) {
-                                JSONObject jsonResponse = response.getJSONObject(i); // viser den siste personen i lista.
+                                JSONObject jsonResponse = response.getJSONObject(i);
                                 String firstname = jsonResponse.getString("firstname");
                                 if (firstname.compareTo(intentFirstname) == 0) {
                                     String lastname = jsonResponse.getString("lastname");
@@ -87,6 +86,4 @@ public class MyProfileActivity extends AppCompatActivity {
         );
         MySingleton.getInstance(MyProfileActivity.this).addToRequestQueue(jsonArrayRequest);
     }
-
-
 } // end of class

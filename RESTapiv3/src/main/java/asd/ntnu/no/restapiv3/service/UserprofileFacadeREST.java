@@ -1,26 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package asd.ntnu.no.restapiv3.service;
 
-import asd.ntnu.no.restapiv3.Picture;
 import asd.ntnu.no.restapiv3.Userprofile;
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -31,9 +15,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
-import org.glassfish.jersey.media.multipart.FormDataParam;
 
 /**
  * @version 03.11.2014
@@ -44,8 +25,6 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 @Produces(MediaType.APPLICATION_JSON)
 public class UserprofileFacadeREST extends AbstractFacade<Userprofile> {
 
-    // @Resource(mappedName="jdbc/Profile")
-    //DataSource dataSource;
     @PersistenceContext(unitName = "asd.ntnu.no_RESTapiv3_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -116,5 +95,5 @@ public class UserprofileFacadeREST extends AbstractFacade<Userprofile> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+   
 }
