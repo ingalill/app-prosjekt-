@@ -6,18 +6,11 @@
 package asd.ntnu.no.restapiv3;
 
 import java.io.Serializable;
-import java.sql.Blob;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -54,7 +47,7 @@ public class Userprofile implements Serializable {
 
     @Size(max = 100)
     private String information;
-    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+  
     @Size(max = 10)
     private String phone;
 
