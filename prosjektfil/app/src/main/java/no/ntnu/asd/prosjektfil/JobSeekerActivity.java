@@ -38,11 +38,11 @@ public class JobSeekerActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
     // the database variable names.
-    public static final String KEY_FIRSTNAME = "firstname";
-    public static final String KEY_LASTNAME = "lastname";
-    public static final String KEY_HOME = "home";
-    public static final String KEY_PHONE = "phone";
-    public static final String KEY_INFORMATION = "information";
+    public static String KEY_FIRSTNAME;
+    public static String KEY_LASTNAME;
+    public static String KEY_HOME;
+    public static String KEY_PHONE;
+    public static String KEY_INFORMATION;
 
     private ArrayList<User> users = new ArrayList<User>();
     private Button createUserButton;
@@ -62,6 +62,12 @@ public class JobSeekerActivity extends AppCompatActivity {
 
         res = getResources();
         URL = res.getString(R.string.url);
+        KEY_FIRSTNAME = res.getString(R.string.firstname);
+        KEY_LASTNAME = res.getString(R.string.lastname);
+        KEY_HOME = res.getString(R.string.home);
+        KEY_PHONE = res.getString(R.string.phone);
+        KEY_INFORMATION = res.getString(R.string.information);
+
 
         profilePicture = (ImageView) findViewById(R.id.smallPreview);
         cameraButton = (Button) findViewById(R.id.buttonProfilepicture);

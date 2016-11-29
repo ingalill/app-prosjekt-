@@ -30,6 +30,13 @@ public class MyProfileActivity extends AppCompatActivity {
     private TextView TextHome;
     private TextView TextInformation;
 
+    // the database variable names.
+    public static String KEY_FIRSTNAME;
+    public static String KEY_LASTNAME;
+    public static String KEY_HOME;
+    public static String KEY_PHONE;
+    public static String KEY_INFORMATION;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +50,11 @@ public class MyProfileActivity extends AppCompatActivity {
 
         res = getResources();
         URL = res.getString(R.string.url);
+        KEY_FIRSTNAME = res.getString(R.string.firstname);
+        KEY_LASTNAME = res.getString(R.string.lastname);
+        KEY_HOME = res.getString(R.string.home);
+        KEY_PHONE = res.getString(R.string.phone);
+        KEY_INFORMATION = res.getString(R.string.information);
 
         Intent intent = getIntent();
         final String intentFirstname = intent.getStringExtra("firstname");
@@ -57,19 +69,19 @@ public class MyProfileActivity extends AppCompatActivity {
                         try {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonResponse = response.getJSONObject(i);
-                                String firstname = jsonResponse.getString("firstname");
+                                String firstname = jsonResponse.getString(KEY_FIRSTNAME);
                                 if (firstname.compareTo(intentFirstname) == 0) {
-                                    String lastname = jsonResponse.getString("lastname");
-                                    String phone = jsonResponse.getString("phone");
-                                    String information = jsonResponse.getString("information");
-                                    String home = jsonResponse.getString("home");
+                                    String lastname = jsonResponse.getString(KEY_LASTNAME);
+                                    String phone = jsonResponse.getString(KEY_PHONE);
+                                    String information = jsonResponse.getString(KEY_INFORMATION);
+                                    String home = jsonResponse.getString(KEY_HOME);
 
                                     TextFirstname.setText(firstname);
                                     TextLastname.setText(lastname);
                                     TextHome.setText(home);
                                     TextPhone.setText(phone);
                                     TextInformation.setText(information);
-                                    System.out.println("Hallo?" + firstname);
+                                   // System.out.println("Hallo?" + firstname);
                                 }
                             }
                         } catch (JSONException e) {

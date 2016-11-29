@@ -4,8 +4,14 @@
     <string name="search_description"> search description </string>
     <string name="action_settings">Settings</string>
     <string name="app_label">Jobbsøker applikasjon</string>
-    <string name="serach_url"> http://158.38.194.47:8080/RESTapiv3/webresources/userprofile/search/</string>
-    <string name="url">http:/158.38.194.47:8080/RESTapiv3/webresources/userprofile</string>
+    <string name="serach_url"> http://10.0.0.31:8080/RESTapiv3/webresources/userprofile/search/</string>
+    <string name="url">http:/10.0.0.31:8080/RESTapiv3/webresources/userprofile</string>
+
+    <string name="firstname">firstname</string>
+    <string name="lastname">lastname</string>
+    <string name="phone">phone</string>
+    <string name="information">information</string>
+    <string name="home">home</string>
 
     
 </resources>

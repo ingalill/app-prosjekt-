@@ -38,6 +38,12 @@ public class SearchActivity extends AppCompatActivity {
     private Resources res;
     private String URL;
 
+    public static String KEY_FIRSTNAME;
+    public static String KEY_LASTNAME;
+    public static String KEY_HOME;
+    public static String KEY_PHONE;
+    public static String KEY_INFORMATION;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +51,11 @@ public class SearchActivity extends AppCompatActivity {
 
         res = getResources();
         URL = res.getString(R.string.serach_url);
+        KEY_FIRSTNAME = res.getString(R.string.firstname);
+        KEY_LASTNAME = res.getString(R.string.lastname);
+        KEY_HOME = res.getString(R.string.home);
+        KEY_PHONE = res.getString(R.string.phone);
+        KEY_INFORMATION = res.getString(R.string.information);
 
         searchResults = (ListView) findViewById(R.id.searchResult);
         searchAdapter = new UserAdapter(this, new ArrayList<User>());
@@ -87,13 +98,13 @@ public class SearchActivity extends AppCompatActivity {
 
                                 JSONObject jsonResponse = response.getJSONObject(i);
                                 User user = new User();
-                                user.setFirstname(jsonResponse.getString("firstname"));
+                                user.setFirstname(jsonResponse.getString(KEY_FIRSTNAME));
                                 if (user.getFirstname().compareTo(query) == 0) {
-                                    user.setFirstname(jsonResponse.getString("firstname"));
-                                    user.setLastname(jsonResponse.getString("lastname"));
-                                    user.setInformation(jsonResponse.getString("information"));
-                                    user.setHome(jsonResponse.getString("home"));
-                                    user.setPhone(jsonResponse.getString("phone"));
+                                    user.setFirstname(jsonResponse.getString(KEY_FIRSTNAME));
+                                    user.setLastname(jsonResponse.getString(KEY_LASTNAME));
+                                    user.setInformation(jsonResponse.getString(KEY_INFORMATION));
+                                    user.setHome(jsonResponse.getString(KEY_HOME));
+                                    user.setPhone(jsonResponse.getString(KEY_PHONE));
                                     result.add(user);
                                 }
                             }
